@@ -7,18 +7,10 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.12</p>
+	<p>Sulfuras Points Cheatsheet, v0.0.13</p>
 	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
 	<div id="message"></div>
-	<div id="items">
-		<div id="item_123">
-			<div>ItemId: 123</div>
-			<div>ItemName: Fafa</div>
-			<div><label>Noxide (Warrior): 230 points + <input type="text"/> = <span>x points</span></label></div>
-			<div><label>Nuxthalia (Hunter): 10 points + <input type="text"/> = <span>x points</span></label></div>
-		</div>
-		<hr/>
-	</div>
+	<div id="items"></div>
 
 	<script type="text/javascript">
 		const API_KEY = 'AIzaSyCNAFRhLa3kMQVTBJsf4-b7yrwlA3PLFDw';
@@ -459,6 +451,7 @@
 
 			children.forEach(p => {
 				root.appendChild(p);
+				root.appendChild(document.createElement('hr'));
 			});
 		}
 	</script>
