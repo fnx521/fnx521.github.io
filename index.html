@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.11</p>
+	<p>Sulfuras Points Cheatsheet, v0.0.12</p>
 	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
 	<div id="message"></div>
 	<div id="items">
@@ -433,12 +433,13 @@
 
 						input.addEventListener("keyup", () => {
 							console.log(input.value);
+							let val;
 							try {
-								let val = parseInt(input.value);
-								span.innerHTML = ` = ${sr.points + val} points`;
+								val = parseInt(input.value);
 							} catch (e) {
-								// ignore
+								val = 0;
 							}
+							span.innerHTML = ` = ${sr.points + val} points`;
 						});
 
 						p.appendChild(div);
