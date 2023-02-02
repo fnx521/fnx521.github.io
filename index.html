@@ -5,11 +5,12 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Sheets API Quickstart</p>
+    <p>Sheets API Quickstart, v2</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
     <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
+	<button id="getdata_button" onclick="handleSignoutClick()">Get Data</button>
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
@@ -40,7 +41,11 @@
       /**
        * Callback after api.js is loaded.
        */
-      function gapiLoaded() {
+      function gapiLoaded0() {
+        gapi.load('client', initializeGapiClient);
+      }
+
+	  function gapiLoaded() {
         gapi.load('client', initializeGapiClient);
       }
 
@@ -60,7 +65,7 @@
       /**
        * Callback after Google Identity Services are loaded.
        */
-      function gisLoaded() {
+      function gisLoaded0() {
         tokenClient = google.accounts.oauth2.initTokenClient({
           client_id: CLIENT_ID,
           scope: SCOPES,
@@ -69,6 +74,10 @@
         gisInited = true;
         maybeEnableButtons();
       }
+
+	  function gisLoaded() {
+		//
+	  }
 
       /**
        * Enables user interaction after all libraries are loaded.
@@ -83,7 +92,7 @@
        *  Sign in the user upon button click.
        */
       function handleAuthClick() {
-        tokenClient.callback = async (resp) => {
+        /*tokenClient.callback = async (resp) => {
           if (resp.error !== undefined) {
             throw (resp);
           }
@@ -99,21 +108,21 @@
         } else {
           // Skip display of account chooser and consent dialog for an existing session.
           tokenClient.requestAccessToken({prompt: ''});
-        }
+        }*/
       }
 
       /**
        *  Sign out the user upon button click.
        */
       function handleSignoutClick() {
-        const token = gapi.client.getToken();
+        /*const token = gapi.client.getToken();
         if (token !== null) {
           google.accounts.oauth2.revoke(token.access_token);
           gapi.client.setToken('');
           document.getElementById('content').innerText = '';
           document.getElementById('authorize_button').innerText = 'Authorize';
           document.getElementById('signout_button').style.visibility = 'hidden';
-        }
+        }*/
       }
 
       /**
