@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Sheets API Quickstart, v2</p>
+    <p>Sheets API Quickstart, v3</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
     <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
-	<button id="getdata_button" onclick="handleSignoutClick()">Get Data</button>
+	<button id="getdata_button" onclick="handleGetDataClick()">Get Data</button>
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
@@ -152,6 +152,21 @@
             'Name, Major:\n');
         document.getElementById('content').innerText = output;
       }
+
+	  async function handleGetDataClick() {
+		let response;
+        try {
+          // Fetch first 10 files
+          response = await gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: '1p_5AG7aXgmphQ-K-_i_51U_NIKu8ywebIf1Ayg5c8UI',
+            range: 'Sheet1!A1:H63',
+          });
+		  document.getElementById('content').innerText = 'Fetched Rows: ' + response.result.values.length;
+        } catch (err) {
+          document.getElementById('content').innerText = err.message;
+          return;
+        }
+	  }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
     <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
