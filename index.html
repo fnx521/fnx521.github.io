@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Sheets API Quickstart, v3</p>
+    <p>Sheets API Quickstart, v4</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
@@ -153,7 +153,7 @@
         document.getElementById('content').innerText = output;
       }
 
-	  async function handleGetDataClick() {
+	  async function handleGetDataClick0() {
 		let response;
         try {
           // Fetch first 10 files
@@ -167,8 +167,23 @@
           return;
         }
 	  }
+
+	  async function handleGetDataClick() {
+		let response;
+        try {
+          // Fetch first 10 files
+          response = await gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: '1s_Ja3ae3QePMox_8gMdkIfjLAVcxsLMVSAUdpbdP2to',
+            range: 'Log!A4114:H',
+          });
+		  document.getElementById('content').innerText = 'Fetched Rows: ' + response.result.values.length;
+        } catch (err) {
+          document.getElementById('content').innerText = err.message;
+          return;
+        }
+	  }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+    <!-- <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script> -->
   </body>
 </html>
