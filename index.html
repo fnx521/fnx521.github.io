@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.8</p>
+	<p>Sulfuras Points Cheatsheet, v0.0.9</p>
 	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
 	<div id="message"></div>
 	<div id="items">
@@ -24,6 +24,21 @@
 		const API_KEY = 'AIzaSyCNAFRhLa3kMQVTBJsf4-b7yrwlA3PLFDw';
 		const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
 		const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+
+		class Item {
+			constructor(boss, name, link) {
+				this.boss = boss;
+				this.name = name;
+				this.link = link;
+
+				let match = link.match(/item=[\d]+/);
+				if (match === null || match.length !== 1) {
+					throw 'Cannot get item id from value: ' + link;
+				}
+
+				this.id = match[0].split('=')[1];
+			}
+		}
 
 		const itemsSpiderWing = [
 			new Item('Anub\'Rekhan', 'Band of Unanswered Prayers', 'https://classic.wowhead.com/item=22939'),
@@ -189,21 +204,6 @@
 			new Item('Trash', 'Spaulders of the Grand Crusader', 'https://classic.wowhead.com/item=23667'),
 			new Item('Trash', 'Stygian Buckler', 'https://classic.wowhead.com/item=23238')
 		];
-
-		class Item {
-			constructor(boss, name, link) {
-				this.boss = boss;
-				this.name = name;
-				this.link = link;
-
-				let match = link.match(/item=[\d]+/);
-				if (match === null || match.length !== 1) {
-					throw 'Cannot get item id from value: ' + link;
-				}
-
-				this.id = match[0].split('=')[1];
-			}
-		}
 
 		let gapiInited = false;
 
