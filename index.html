@@ -7,16 +7,203 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.7</p>
-
-	<button id="getdata_button" onclick="handleGetDataClick()">Get Data</button>
+	<p>Sulfuras Points Cheatsheet, v0.0.8</p>
 	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
 	<div id="message"></div>
+	<div id="items">
+		<div id="item_123">
+			<div>ItemId: 123</div>
+			<div>ItemName: Fafa</div>
+			<div><label>Noxide (Warrior): 230 points + <input type="text"/> = <span>x points</span></label></div>
+			<div><label>Nuxthalia (Hunter): 10 points + <input type="text"/> = <span>x points</span></label></div>
+		</div>
+		<hr/>
+	</div>
 
 	<script type="text/javascript">
 		const API_KEY = 'AIzaSyCNAFRhLa3kMQVTBJsf4-b7yrwlA3PLFDw';
 		const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
 		const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+
+		const itemsSpiderWing = [
+			new Item('Anub\'Rekhan', 'Band of Unanswered Prayers', 'https://classic.wowhead.com/item=22939'),
+			new Item('Anub\'Rekhan', 'Cryptfiend Silk Cloak', 'https://classic.wowhead.com/item=22938'),
+			new Item('Anub\'Rekhan', 'Gem of Nerubis', 'https://classic.wowhead.com/item=22937'),
+			new Item('Anub\'Rekhan', 'Touch of Frost', 'https://classic.wowhead.com/item=22935'),
+			new Item('Anub\'Rekhan', 'Wristguards of Vengeance', 'https://classic.wowhead.com/item=22936'),
+
+			new Item('Grand Widow Faerlina', 'Icebane Pauldrons', 'https://classic.wowhead.com/item=22940'),
+			new Item('Grand Widow Faerlina', 'Malice Stone Pendant', 'https://classic.wowhead.com/item=22943'),
+			new Item('Grand Widow Faerlina', 'Polar Shoulder Pads', 'https://classic.wowhead.com/item=22941'),
+			new Item('Grand Widow Faerlina', 'The Widow\'s Embrace', 'https://classic.wowhead.com/item=22942'),
+			new Item('Grand Widow Faerlina', 'Widow\'s Remorse', 'https://classic.wowhead.com/item=22806'),
+
+			new Item('Maexxna', 'Crystal Webbed Robe', 'https://classic.wowhead.com/item=23220'),
+			new Item('Maexxna', 'Desecrated Gauntlets', 'https://classic.wowhead.com/item=22357'),
+			new Item('Maexxna', 'Desecrated Gloves', 'https://classic.wowhead.com/item=22371'),
+			new Item('Maexxna', 'Desecrated Handguards', 'https://classic.wowhead.com/item=22364'),
+			new Item('Maexxna', 'Kiss of the Spider', 'https://classic.wowhead.com/item=22954'),
+			new Item('Maexxna', 'Maexxna\'s Fang', 'https://classic.wowhead.com/item=22804'),
+			new Item('Maexxna', 'Pendant of Forgotten Names', 'https://classic.wowhead.com/item=22947'),
+			new Item('Maexxna', 'Wraith Blade', 'https://classic.wowhead.com/item=22807')
+		];
+
+		const itemsPlagueWing = [
+			new Item('Noth the Plaguebringer', 'Band of the Inevitable', 'https://classic.wowhead.com/item=23031'),
+			new Item('Noth the Plaguebringer', 'Cloak of the Scourge', 'https://classic.wowhead.com/item=23030'),
+			new Item('Noth the Plaguebringer', 'Hailstone Band', 'https://classic.wowhead.com/item=23028'),
+			new Item('Noth the Plaguebringer', 'Hatchet of Sundered Bone', 'https://classic.wowhead.com/item=22816'),
+			new Item('Noth the Plaguebringer', 'Libram of Light', 'https://classic.wowhead.com/item=23006'),
+			new Item('Noth the Plaguebringer', 'Noth\'s Frigid Heart', 'https://classic.wowhead.com/item=23029'),
+			new Item('Noth the Plaguebringer', 'Totem of Flowing Water', 'https://classic.wowhead.com/item=23005'),
+
+			new Item('Heigan the Unclean', 'Icebane Helmet', 'https://classic.wowhead.com/item=23019'),
+			new Item('Heigan the Unclean', 'Icy Scale Coif', 'https://classic.wowhead.com/item=23033'),
+			new Item('Heigan the Unclean', 'Legplates of Carnage', 'https://classic.wowhead.com/item=23068'),
+			new Item('Heigan the Unclean', 'Necklace of Necropsy', 'https://classic.wowhead.com/item=23036'),
+			new Item('Heigan the Unclean', 'Preceptor\'s Hat', 'https://classic.wowhead.com/item=23035'),
+
+			new Item('Loatheb', 'Band of Unnatural Forces', 'https://classic.wowhead.com/item=23038'),
+			new Item('Loatheb', 'Brimstone Staff', 'https://classic.wowhead.com/item=22800'),
+			new Item('Loatheb', 'Desecrated Leggings', 'https://classic.wowhead.com/item=22366'),
+			new Item('Loatheb', 'Desecrated Legguards', 'https://classic.wowhead.com/item=22359'),
+			new Item('Loatheb', 'Desecrated Legplates', 'https://classic.wowhead.com/item=22352'),
+			new Item('Loatheb', 'Loatheb\'s Reflection', 'https://classic.wowhead.com/item=23042'),
+			new Item('Loatheb', 'Ring of Spiritual Fervor', 'https://classic.wowhead.com/item=23037'),
+			new Item('Loatheb', 'The Eye of Nerub', 'https://classic.wowhead.com/item=23039')
+		];
+
+		const itemsDeathknightWing = [
+			new Item('Instructor Razuvious', 'Girdle of the Mentor', 'https://classic.wowhead.com/item=23219'),
+			new Item('Instructor Razuvious', 'Iblis, Blade of the Fallen Seraph', 'https://classic.wowhead.com/item=23014'),
+			new Item('Instructor Razuvious', 'Idol of Longevity', 'https://classic.wowhead.com/item=23004'),
+			new Item('Instructor Razuvious', 'Signet of the Fallen Defender', 'https://classic.wowhead.com/item=23018'),
+			new Item('Instructor Razuvious', 'Veil of Eclipse', 'https://classic.wowhead.com/item=23017'),
+			new Item('Instructor Razuvious', 'Wand of the Whispering Dead', 'https://classic.wowhead.com/item=23009'),
+
+			new Item('Gothik the Harvester', 'Boots of Displacement', 'https://classic.wowhead.com/item=23073'),
+			new Item('Gothik the Harvester', 'Glacial Headdress', 'https://classic.wowhead.com/item=23032'),
+			new Item('Gothik the Harvester', 'Polar Helmet', 'https://classic.wowhead.com/item=23020'),
+			new Item('Gothik the Harvester', 'Sadist\'s Collar', 'https://classic.wowhead.com/item=23023'),
+			new Item('Gothik the Harvester', 'The Soul Harvester\s Bindings', 'https://classic.wowhead.com/item=23021'),
+
+			new Item('The Four Horsemen', 'Corrupted Ashbringer', 'https://classic.wowhead.com/item=22691'),
+			new Item('The Four Horsemen', 'Desecrated Breastplate', 'https://classic.wowhead.com/item=22349'),
+			new Item('The Four Horsemen', 'Desecrated Robe', 'https://classic.wowhead.com/item=22351'),
+			new Item('The Four Horsemen', 'Desecrated Tunic', 'https://classic.wowhead.com/item=22350'),
+			new Item('The Four Horsemen', 'Leggings of Apocalypse', 'https://classic.wowhead.com/item=23071'),
+			new Item('The Four Horsemen', 'Maul of the Redeemed Crusader', 'https://classic.wowhead.com/item=22809'),
+			new Item('The Four Horsemen', 'Seal of the Damned', 'https://classic.wowhead.com/item=23025'),
+			new Item('The Four Horsemen', 'Soulstring', 'https://classic.wowhead.com/item=22811'),
+			new Item('The Four Horsemen', 'Warmth of Forgiveness', 'https://classic.wowhead.com/item=23027')
+		];
+
+		const itemsAbominationWing = [
+			new Item('Patchwerk', 'Band of Reanimation', 'https://classic.wowhead.com/item=22961'),
+			new Item('Patchwerk', 'Cloak of Suturing', 'https://classic.wowhead.com/item=22960'),
+			new Item('Patchwerk', 'Severance', 'https://classic.wowhead.com/item=22815'),
+			new Item('Patchwerk', 'The Plague Bearer', 'https://classic.wowhead.com/item=22818'),
+			new Item('Patchwerk', 'Wand of Fates', 'https://classic.wowhead.com/item=22820'),
+
+			new Item('Grobbulus', 'Glacial Mantle', 'https://classic.wowhead.com/item=22968'),
+			new Item('Grobbulus', 'Icy Scale Spaulders', 'https://classic.wowhead.com/item=22967'),
+			new Item('Grobbulus', 'Midnight Haze', 'https://classic.wowhead.com/item=22803'),
+			new Item('Grobbulus', 'The End of Dreams', 'https://classic.wowhead.com/item=22988'),
+			new Item('Grobbulus', 'Toxin Injector', 'https://classic.wowhead.com/item=22810'),
+
+			new Item('Gluth', 'Claymore of Unholy Might', 'https://classic.wowhead.com/item=22813'),
+			new Item('Gluth', 'Death\'s Bargain', 'https://classic.wowhead.com/item=23075'),
+			new Item('Gluth', 'Digested Hand of Power', 'https://classic.wowhead.com/item=22994'),
+			new Item('Gluth', 'Gluth\'s Missing Collar', 'https://classic.wowhead.com/item=22981'),
+			new Item('Gluth', 'Rime Covered Mantle', 'https://classic.wowhead.com/item=22983'),
+
+			new Item('Thaddius', 'Desecrated Circlet', 'https://classic.wowhead.com/item=22367'),
+			new Item('Thaddius', 'Desecrated Headpiece', 'https://classic.wowhead.com/item=22360'),
+			new Item('Thaddius', 'Desecrated Helmet', 'https://classic.wowhead.com/item=22353'),
+			new Item('Thaddius', 'Eye of Diminution', 'https://classic.wowhead.com/item=23001'),
+			new Item('Thaddius', 'Leggings of Polarity', 'https://classic.wowhead.com/item=23070'),
+			new Item('Thaddius', 'Plated Abomination Ribcage', 'https://classic.wowhead.com/item=23000'),
+			new Item('Thaddius', 'Spire of Twilight', 'https://classic.wowhead.com/item=22801'),
+			new Item('Thaddius', 'The Castigator', 'https://classic.wowhead.com/item=22808')
+		];
+
+		const itemsFrostwyrmLair = [
+			new Item('Sapphiron', 'Claw of the Frost Wyrm', 'https://classic.wowhead.com/item=23242'),
+			new Item('Sapphiron', 'Cloak of the Necropolis', 'https://classic.wowhead.com/item=23050'),
+			new Item('Sapphiron', 'Eye of the Dead', 'https://classic.wowhead.com/item=23047'),
+			new Item('Sapphiron', 'Fortitude of the Scourge', 'https://classic.wowhead.com/item=23549'),
+			new Item('Sapphiron', 'Glyph of Deflection', 'https://classic.wowhead.com/item=23040'),
+			new Item('Sapphiron', 'Might of the Scourge', 'https://classic.wowhead.com/item=23548'),
+			new Item('Sapphiron', 'Power of the Scourge', 'https://classic.wowhead.com/item=23545'),
+			new Item('Sapphiron', 'Resilience of the Scourge', 'https://classic.wowhead.com/item=23547'),
+			new Item('Sapphiron', 'Sapphiron\'s Left Eye', 'https://classic.wowhead.com/item=23049'),
+			new Item('Sapphiron', 'Sapphiron\'s Right Eye', 'https://classic.wowhead.com/item=23048'),
+			new Item('Sapphiron', 'Shroud of Dominion', 'https://classic.wowhead.com/item=23045'),
+			new Item('Sapphiron', 'Slayer\'s Crest', 'https://classic.wowhead.com/item=23041'),
+			new Item('Sapphiron', 'The Face of Death', 'https://classic.wowhead.com/item=23043'),
+			new Item('Sapphiron', 'The Restrained Essence of Sapphiron', 'https://classic.wowhead.com/item=23046'),
+
+			new Item('Kel\'Thuzad', 'Bonescythe Ring', 'https://classic.wowhead.com/item=23060'),
+			new Item('Kel\'Thuzad', 'Doomfinger', 'https://classic.wowhead.com/item=22821'),
+			new Item('Kel\'Thuzad', 'Frostfire Ring', 'https://classic.wowhead.com/item=23062'),
+			new Item('Kel\'Thuzad', 'Gem of Trapped Innocents', 'https://classic.wowhead.com/item=23057'),
+			new Item('Kel\'Thuzad', 'Gressil, Dawn of Ruin', 'https://classic.wowhead.com/item=23054'),
+			new Item('Kel\'Thuzad', 'Hammer of the Twisting Nether', 'https://classic.wowhead.com/item=23056'),
+			new Item('Kel\'Thuzad', 'Kingsfall', 'https://classic.wowhead.com/item=22802'),
+			new Item('Kel\'Thuzad', 'Might of Menethil', 'https://classic.wowhead.com/item=22798'),
+			new Item('Kel\'Thuzad', 'Nerubian Slavemaker', 'https://classic.wowhead.com/item=22812'),
+			new Item('Kel\'Thuzad', 'Plagueheart Ring', 'https://classic.wowhead.com/item=23063'),
+			new Item('Kel\'Thuzad', 'Ring of Faith', 'https://classic.wowhead.com/item=23061'),
+			new Item('Kel\'Thuzad', 'Ring of Redemption', 'https://classic.wowhead.com/item=23066'),
+			new Item('Kel\'Thuzad', 'Ring of the Cryptstalker', 'https://classic.wowhead.com/item=23067'),
+			new Item('Kel\'Thuzad', 'Ring of the Dreadnaught', 'https://classic.wowhead.com/item=23059'),
+			new Item('Kel\'Thuzad', 'Ring of the Dreamwalker', 'https://classic.wowhead.com/item=23064'),
+			new Item('Kel\'Thuzad', 'Shield of Condemnation', 'https://classic.wowhead.com/item=22819'),
+			new Item('Kel\'Thuzad', 'Soulseeker', 'https://classic.wowhead.com/item=22799'),
+			new Item('Kel\'Thuzad', 'Stormrage\'s Talisman of Seething', 'https://classic.wowhead.com/item=23053'),
+			new Item('Kel\'Thuzad', 'The Hungering Cold', 'https://classic.wowhead.com/item=23577'),
+			new Item('Kel\'Thuzad', 'The Phylactery of Kel\'Thuzad', 'https://classic.wowhead.com/item=22520')
+		];
+
+		const itemsTrashAndTier = [
+			new Item('Shared', 'Desecrated Belt', 'https://classic.wowhead.com/item=22370'),
+			new Item('Shared', 'Desecrated Bindings', 'https://classic.wowhead.com/item=22369'),
+			new Item('Shared', 'Desecrated Boots', 'https://classic.wowhead.com/item=22365'),
+			new Item('Shared', 'Desecrated Bracers', 'https://classic.wowhead.com/item=22355'),
+			new Item('Shared', 'Desecrated Girdle', 'https://classic.wowhead.com/item=22363'),
+			new Item('Shared', 'Desecrated Pauldrons', 'https://classic.wowhead.com/item=22354'),
+			new Item('Shared', 'Desecrated Sabatons', 'https://classic.wowhead.com/item=22358'),
+			new Item('Shared', 'Desecrated Sandals', 'https://classic.wowhead.com/item=22372'),
+			new Item('Shared', 'Desecrated Shoulderpads', 'https://classic.wowhead.com/item=22368'),
+			new Item('Shared', 'Desecrated Spaulders', 'https://classic.wowhead.com/item=22361'),
+			new Item('Shared', 'Desecrated Waistguard', 'https://classic.wowhead.com/item=22356'),
+			new Item('Shared', 'Desecrated Wristguards', 'https://classic.wowhead.com/item=22362'),
+
+			new Item('Trash', 'Belt of the Grand Crusader', 'https://classic.wowhead.com/item=23666'),
+			new Item('Trash', 'Ghoul Skin Tunic', 'https://classic.wowhead.com/item=23226'),
+			new Item('Trash', 'Harbinger of Doom', 'https://classic.wowhead.com/item=23044'),
+			new Item('Trash', 'Leggings of the Grand Crusader', 'https://classic.wowhead.com/item=23668'),
+			new Item('Trash', 'Misplaced Servo Arm', 'https://classic.wowhead.com/item=23221'),
+			new Item('Trash', 'Necro-Knight\'s Garb', 'https://classic.wowhead.com/item=23069'),
+			new Item('Trash', 'Ring of the Eternal Flame', 'https://classic.wowhead.com/item=23237'),
+			new Item('Trash', 'Spaulders of the Grand Crusader', 'https://classic.wowhead.com/item=23667'),
+			new Item('Trash', 'Stygian Buckler', 'https://classic.wowhead.com/item=23238')
+		];
+
+		class Item {
+			constructor(boss, name, link) {
+				this.boss = boss;
+				this.name = name;
+				this.link = link;
+
+				let match = link.match(/item=[\d]+/);
+				if (match === null || match.length !== 1) {
+					throw 'Cannot get item id from value: ' + link;
+				}
+
+				this.id = match[0].split('=')[1];
+			}
+		}
 
 		let gapiInited = false;
 
@@ -196,6 +383,68 @@
 				}
 			}
 			console.log(`groupByItemCollisionsOnly keys: ${Object.keys(groupByItemCollisionsOnly).length}`);
+
+			const itemsElem = document.getElementById('items');
+			itemsElem.innerHTML = '';
+
+			let h1 = document.createElement('h1');
+			h1.appendChild(document.createTextNode('SpiderWing'));
+			itemsElem.appendChild(h1);
+
+			// layout items
+			itemsElem.appendChild();
+			for (let i = 0; i < itemsSpiderWing.length; i++) {
+				const item = itemsSpiderWing[i];
+				const players = groupByItemCollisionsOnly[item.id];
+				if (players) {
+					let div1 = document.createElement('div');
+					div1.appendChild(document.createTextNode('Boss: ' + item.boss));
+					let div2 = document.createElement('div');
+					div2.appendChild(document.createTextNode('ItemId: ' + item.id));
+					let div3 = document.createElement('div');
+					div3.appendChild(document.createTextNode('ItemName: ' + item.name));
+
+					itemsElem.appendChild(div1);
+					itemsElem.appendChild(div2);
+					itemsElem.appendChild(div3);
+
+					for (let j = 0; j < players.length; j++) {
+						const sr = players[j];
+
+						let label = document.createElement('label');
+						let input = document.createElement('input');
+						let span = document.createElement('span');
+
+						label.appendChild(document.createTextNode(`${sr.name} (${sr.class}): ${sr.points}&nbsp;points&nbsp;+&nbsp;`));
+						span.innerHTML = `&nbsp;=&nbsp;${'x'}&nbsp;points`;
+
+						let div = document.createElement('div');
+						div.appendChild(label);
+						div.appendChild(input);
+						div.appendChild(span);
+
+						input.addEventListener("change", () => {
+							console.log(input.value);
+							try {
+								let val = parseInt(input.value);
+								span.innerHTML = `&nbsp;=&nbsp;${sr.points + val}&nbsp;points`;
+							} catch (e) {
+								// ignore
+							}
+						});
+
+						itemsElem.appendChild(div);
+					}
+				}
+			}
+
+			/* <div id="item_123">
+				<div>ItemId: 123</div>
+				<div>ItemId: 123</div>
+				<div>ItemName: Fafa</div>
+				<div><label>Noxide (Warrior): 230 points + </label><input type="text"/><span> = x points</span></div>
+				<div><label>Nuxthalia (Hunter): 10 points + </label><input type="text"/><span> = x points</span></div>
+			</div> */
 		}
 	</script>
 	<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
