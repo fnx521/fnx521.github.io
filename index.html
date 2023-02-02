@@ -7,10 +7,11 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.2</p>
+	<p>Sulfuras Points Cheatsheet, v0.0.3</p>
 
 	<button id="getdata_button" onclick="handleGetDataClick()">Get Data</button>
-	<pre id="content" style="white-space: pre-wrap;"></pre>
+	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
+	<div id="message"></div>
 
 	<script type="text/javascript">
 		const API_KEY = 'AIzaSyCNAFRhLa3kMQVTBJsf4-b7yrwlA3PLFDw';
@@ -69,6 +70,10 @@
 		  document.getElementById('content').innerText = output;
 		}*/
 
+		function showMessage(message) {
+			document.getElementById('message').innerText = message;
+		}
+
 		async function fetchAndProcessData() {
 			let response;
 			try {
@@ -79,15 +84,39 @@
 
 				const range = response.result;
 				if (!range || !range.values || range.values.length == 0) {
-					document.getElementById('content').innerText = 'No values found.';
-					console.log(`Data fetched: no data found`);
+					showMessage('Data fetched: no data found');
+					console.log('Data fetched: no data found');
 				} else {
-					console.log(`Data fetched: ${response.result.values.length} rows`);
+					console.log(`Data fetched: ${range.values.length} rows`);
+					processRange(range);
 				}
 			} catch (err) {
-				//document.getElementById('content').innerText = err.message;
+				showMessage(`Error fetching data: ${err.message}`);
 				console.log(`Error fetching data: ${err.message}`);
 			}
+		}
+
+		function processRange(range) {
+			console.log(`Range requested: ${range.range}`);
+			const rows = range.values;
+
+			// get last header (from bottom)
+			let headerRowIdx = -1;
+			for (let i = rows.length - 1; i >= 0; i--) {
+				const row = rows[i];
+				if (row.length > 0 && row[0] == '#') {
+					headerRowIdx = i;
+					break;
+				}
+			}
+
+			if (headerRowIdx === -1) {
+				console.log('Error: Header row not found');
+				return;
+			}
+
+			const header = rows[headerRowIdx];
+			console.log(`headerRowIdx: ${headerRowIdx}, header: ${header}`);
 		}
 	</script>
 	<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
