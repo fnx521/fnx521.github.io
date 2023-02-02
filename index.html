@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.4</p>
+	<p>Sulfuras Points Cheatsheet, v0.0.5</p>
 
 	<button id="getdata_button" onclick="handleGetDataClick()">Get Data</button>
 	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
@@ -101,6 +101,7 @@
 			if (idx < 0) {
 				throw message;
 			}
+			return idx;
 		}
 
 		class HeaderMeta {
