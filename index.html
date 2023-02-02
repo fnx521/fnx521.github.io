@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.3</p>
+	<p>Sulfuras Points Cheatsheet, v0.0.4</p>
 
 	<button id="getdata_button" onclick="handleGetDataClick()">Get Data</button>
 	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
@@ -96,6 +96,36 @@
 			}
 		}
 
+		function getIndexOrThrow(arr, val, message) {
+			const idx = arr.indexOf(val);
+			if (idx < 0) {
+				throw message;
+			}
+		}
+
+		class HeaderMeta {
+			constructor(headerRow) {
+				this.headerRow = headerRow;
+				this.num = getIndexOrThrow(headerRow, '#', `Cannot get index of column: '#'`);
+				this.date = getIndexOrThrow(headerRow, 'Date', `Cannot get index of column: 'Date'`);
+				this.name = getIndexOrThrow(headerRow, 'Name', `Cannot get index of column: 'Name'`);
+				this.class = getIndexOrThrow(headerRow, 'Class', `Cannot get index of column: 'Class'`);
+				this.itemId = getIndexOrThrow(headerRow, 'Item', `Cannot get index of column: 'Item'`);
+				this.points = getIndexOrThrow(headerRow, 'New Points', `Cannot get index of column: 'New Points'`);
+			}
+		}
+
+		class SoftRes {
+			constructor(num, date, name, clazz, itemId, points) {
+				this.num = num;
+				this.date = date;
+				this.name = name;
+				this.class = clazz;
+				this.itemId = itemId;
+				this.points = points;
+			}
+		}
+
 		function processRange(range) {
 			console.log(`Range requested: ${range.range}`);
 			const rows = range.values;
@@ -115,8 +145,34 @@
 				return;
 			}
 
-			const header = rows[headerRowIdx];
-			console.log(`headerRowIdx: ${headerRowIdx}, header: ${header}`);
+			const headerRow = rows[headerRowIdx];
+			console.log(`headerRowIdx: ${headerRowIdx}, header: ${headerRow}`);
+			const header = new HeaderMeta(headerRow);
+
+			// read data
+			const srData = [];
+			for (let i = headerRowIdx + 1; i < rows.length; i++) {
+				const row = rows[i];
+				if (row.length == 0) {
+					break;
+				}
+				srData.push(new SoftRes(
+					Number(row[header.num]),
+					row[header.date],
+					row[header.name],
+					row[header.class],
+					row[header.itemId],
+					row[header.points]
+				));
+			}
+			console.log(`SrData items: ${srData.length}`);
+
+			if (srData.length == 0) {
+				showMessage('Parse error: no softres rows found');
+				return;
+			}
+
+			showMessage(`Raid date: ${srData[0].date}, log records found: ${srData.length}`);
 		}
 	</script>
 	<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
