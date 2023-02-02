@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.6</p>
+	<p>Sulfuras Points Cheatsheet, v0.0.7</p>
 
 	<button id="getdata_button" onclick="handleGetDataClick()">Get Data</button>
 	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
@@ -185,6 +185,17 @@
 				groupByItem[sr.itemId].push(sr);
 			}
 			console.log(`GroupByItem keys: ${Object.keys(groupByItem).length}`);
+
+			const groupByItemCollisionsOnly = {};
+			for (const itemId in groupByItem) {
+				if (Object.hasOwnProperty.call(groupByItem, itemId)) {
+					const srList = groupByItem[itemId];
+					if (srList.length > 1) {
+						groupByItemCollisionsOnly[itemId] = srList;
+					}
+				}
+			}
+			console.log(`groupByItemCollisionsOnly keys: ${Object.keys(groupByItemCollisionsOnly).length}`);
 		}
 	</script>
 	<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
