@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.10</p>
+	<p>Sulfuras Points Cheatsheet, v0.0.11</p>
 	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
 	<div id="message"></div>
 	<div id="items">
@@ -350,7 +350,7 @@
 					row[header.name],
 					row[header.class],
 					row[header.itemId],
-					row[header.points]
+					Number(row[header.points])
 				));
 			}
 			console.log(`SrData items: ${srData.length}`);
@@ -384,18 +384,27 @@
 			}
 			console.log(`groupByItemCollisionsOnly keys: ${Object.keys(groupByItemCollisionsOnly).length}`);
 
+			// clean everything
 			const itemsElem = document.getElementById('items');
 			itemsElem.innerHTML = '';
 
-			let h1 = document.createElement('h1');
-			h1.appendChild(document.createTextNode('SpiderWing'));
-			itemsElem.appendChild(h1);
+			doTheLayout(itemsElem, 'SpiderWing', itemsSpiderWing, groupByItemCollisionsOnly);
+			doTheLayout(itemsElem, 'PlagueWing', itemsPlagueWing, groupByItemCollisionsOnly);
+			doTheLayout(itemsElem, 'DeathknightWing', itemsDeathknightWing, groupByItemCollisionsOnly);
+			doTheLayout(itemsElem, 'AbominationWing', itemsAbominationWing, groupByItemCollisionsOnly);
+			doTheLayout(itemsElem, 'FrostwyrmLair', itemsFrostwyrmLair, groupByItemCollisionsOnly);
+			doTheLayout(itemsElem, 'TrashAndTier', itemsTrashAndTier, groupByItemCollisionsOnly);
+		}
 
+		function doTheLayout(root, sectionName, sectionItems, groupByItemCollisionsOnly) {
 			// layout items
-			for (let i = 0; i < itemsSpiderWing.length; i++) {
-				const item = itemsSpiderWing[i];
+			let children = [];
+			for (let i = 0; i < sectionItems.length; i++) {
+				const item = sectionItems[i];
 				const players = groupByItemCollisionsOnly[item.id];
 				if (players) {
+					let p = document.createElement('p');
+
 					let div1 = document.createElement('div');
 					div1.appendChild(document.createTextNode('Boss: ' + item.boss));
 					let div2 = document.createElement('div');
@@ -403,9 +412,9 @@
 					let div3 = document.createElement('div');
 					div3.appendChild(document.createTextNode('ItemName: ' + item.name));
 
-					itemsElem.appendChild(div1);
-					itemsElem.appendChild(div2);
-					itemsElem.appendChild(div3);
+					p.appendChild(div1);
+					p.appendChild(div2);
+					p.appendChild(div3);
 
 					for (let j = 0; j < players.length; j++) {
 						const sr = players[j];
@@ -414,36 +423,42 @@
 						let input = document.createElement('input');
 						let span = document.createElement('span');
 
-						label.appendChild(document.createTextNode(`${sr.name} (${sr.class}): ${sr.points}&nbsp;points&nbsp;+&nbsp;`));
-						span.innerHTML = `&nbsp;=&nbsp;${'x'}&nbsp;points`;
+						label.appendChild(document.createTextNode(`${sr.name} (${sr.class}): ${sr.points} points + `));
+						span.innerHTML = ` = ${'x'} points`;
 
 						let div = document.createElement('div');
 						div.appendChild(label);
 						div.appendChild(input);
 						div.appendChild(span);
 
-						input.addEventListener("change", () => {
+						input.addEventListener("keyup", () => {
 							console.log(input.value);
 							try {
 								let val = parseInt(input.value);
-								span.innerHTML = `&nbsp;=&nbsp;${sr.points + val}&nbsp;points`;
+								span.innerHTML = ` = ${sr.points + val} points`;
 							} catch (e) {
 								// ignore
 							}
 						});
 
-						itemsElem.appendChild(div);
+						p.appendChild(div);
 					}
+
+					children.push(p);
 				}
 			}
 
-			/* <div id="item_123">
-				<div>ItemId: 123</div>
-				<div>ItemId: 123</div>
-				<div>ItemName: Fafa</div>
-				<div><label>Noxide (Warrior): 230 points + </label><input type="text"/><span> = x points</span></div>
-				<div><label>Nuxthalia (Hunter): 10 points + </label><input type="text"/><span> = x points</span></div>
-			</div> */
+			if (children.length == 0) {
+				return;
+			}
+
+			let h1 = document.createElement('h1');
+			h1.appendChild(document.createTextNode(sectionName));
+			root.appendChild(h1);
+
+			children.forEach(p => {
+				root.appendChild(p);
+			});
 		}
 	</script>
 	<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
