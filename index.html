@@ -1,120 +1,96 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Sheets API Quickstart</title>
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    <p>Sheets API Quickstart, v5</p>
+
+<head>
+	<title>Sulfuras Points Cheatsheet</title>
+	<meta charset="utf-8" />
+</head>
+
+<body>
+	<p>Sulfuras Points Cheatsheet, v0.0.1</p>
 
 	<button id="getdata_button" onclick="handleGetDataClick()">Get Data</button>
+	<pre id="content" style="white-space: pre-wrap;"></pre>
 
-    <pre id="content" style="white-space: pre-wrap;"></pre>
+	<script type="text/javascript">
+		const API_KEY = 'AIzaSyCNAFRhLa3kMQVTBJsf4-b7yrwlA3PLFDw';
+		const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
+		const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
 
-    <script type="text/javascript">
-      /* exported gapiLoaded */
-      /* exported gisLoaded */
-      /* exported handleAuthClick */
-      /* exported handleSignoutClick */
+		let gapiInited = false;
 
-      // TODO(developer): Set to client ID and API key from the Developer Console
-      const CLIENT_ID = '92273353604-5bfnqq82gbepak2culsgviq9pfobghph.apps.googleusercontent.com';
-      const API_KEY = 'AIzaSyCNAFRhLa3kMQVTBJsf4-b7yrwlA3PLFDw';
+		/**
+		 * Callback after api.js is loaded.
+		 */
+		function gapiLoaded() {
+			console.log('GApi loaded');
+			gapi.load('client', initializeGapiClient);
+			fetchAndProcessData();
+		}
 
-      // Discovery doc URL for APIs used by the quickstart
-      const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
+		/**
+		 * Callback after the API client is loaded. Loads the
+		 * discovery doc to initialize the API.
+		 */
+		async function initializeGapiClient() {
+			await gapi.client.init({
+				apiKey: API_KEY,
+				discoveryDocs: [DISCOVERY_DOC],
+			});
+			gapiInited = true;
+			console.log('Client initialized');
+		}
 
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+		/**
+		 * Print the names and majors of students in a sample spreadsheet:
+		 * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+		 */
+		/*async function listMajors() {
+		  let response;
+		  try {
+			// Fetch first 10 files
+			response = await gapi.client.sheets.spreadsheets.values.get({
+			  spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
+			  range: 'Class Data!A2:E',
+			});
+		  } catch (err) {
+			document.getElementById('content').innerText = err.message;
+			return;
+		  }
+		  const range = response.result;
+		  if (!range || !range.values || range.values.length == 0) {
+			document.getElementById('content').innerText = 'No values found.';
+			return;
+		  }
+		  // Flatten to string to display
+		  const output = range.values.reduce(
+			  (str, row) => `${str}${row[0]}, ${row[4]}\n`,
+			  'Name, Major:\n');
+		  document.getElementById('content').innerText = output;
+		}*/
 
-      let tokenClient;
-      let gapiInited = false;
-      let gisInited = false;
+		async function fetchAndProcessData() {
+			let response;
+			try {
+				response = await gapi.client.sheets.spreadsheets.values.get({
+					spreadsheetId: '1s_Ja3ae3QePMox_8gMdkIfjLAVcxsLMVSAUdpbdP2to',
+					range: 'Log!A4114:H',
+				});
 
-      /**
-       * Callback after api.js is loaded.
-       */
-      function gapiLoaded0() {
-        gapi.load('client', initializeGapiClient);
-      }
+				const range = response.result;
+				if (!range || !range.values || range.values.length == 0) {
+					document.getElementById('content').innerText = 'No values found.';
+					console.log(`Data fetched: no data found`);
+				} else {
+					console.log(`Data fetched: ${response.result.values.length} rows`);
+				}
+			} catch (err) {
+				//document.getElementById('content').innerText = err.message;
+				console.log(`Error fetching data: ${err.message}`);
+			}
+		}
+	</script>
+	<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+</body>
 
-	  function gapiLoaded() {
-        //gapi.load('client', initializeGapiClient);
-		console.log('gapiLoaded');
-      }
-
-      /**
-       * Callback after the API client is loaded. Loads the
-       * discovery doc to initialize the API.
-       */
-      async function initializeGapiClient() {
-        await gapi.client.init({
-          apiKey: API_KEY,
-          discoveryDocs: [DISCOVERY_DOC],
-        });
-        gapiInited = true;
-        //maybeEnableButtons();
-      }
-
-      /**
-       * Print the names and majors of students in a sample spreadsheet:
-       * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-       */
-      /*async function listMajors() {
-        let response;
-        try {
-          // Fetch first 10 files
-          response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-            range: 'Class Data!A2:E',
-          });
-        } catch (err) {
-          document.getElementById('content').innerText = err.message;
-          return;
-        }
-        const range = response.result;
-        if (!range || !range.values || range.values.length == 0) {
-          document.getElementById('content').innerText = 'No values found.';
-          return;
-        }
-        // Flatten to string to display
-        const output = range.values.reduce(
-            (str, row) => `${str}${row[0]}, ${row[4]}\n`,
-            'Name, Major:\n');
-        document.getElementById('content').innerText = output;
-      }*/
-
-	  /*async function handleGetDataClick0() {
-		let response;
-        try {
-          // Fetch first 10 files
-          response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '1p_5AG7aXgmphQ-K-_i_51U_NIKu8ywebIf1Ayg5c8UI',
-            range: 'Sheet1!A1:H63',
-          });
-		  document.getElementById('content').innerText = 'Fetched Rows: ' + response.result.values.length;
-        } catch (err) {
-          document.getElementById('content').innerText = err.message;
-          return;
-        }
-	  }*/
-
-	  async function handleGetDataClick() {
-		let response;
-        try {
-          // Fetch first 10 files
-          response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '1s_Ja3ae3QePMox_8gMdkIfjLAVcxsLMVSAUdpbdP2to',
-            range: 'Log!A4114:H',
-          });
-		  document.getElementById('content').innerText = 'Fetched Rows: ' + response.result.values.length;
-        } catch (err) {
-          document.getElementById('content').innerText = err.message;
-          return;
-        }
-	  }
-    </script>
-    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-  </body>
 </html>
