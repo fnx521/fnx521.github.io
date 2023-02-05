@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.14</p>
+	<p>Sulfuras Points Cheatsheet, v0.0.15</p>
 	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
 	<div id="message"></div>
 	<div id="items"></div>
@@ -32,7 +32,157 @@
 			}
 		}
 
-		const itemsSpiderWing = [
+		const ITEMS_MC = [
+			new Item('Magmadar', 'Striker\'s Mark', 'https://classic.wowhead.com/item=17069'),
+			new Item('Majordomo Executus', 'Wild Growth Spaulders', 'https://classic.wowhead.com/item=18810'),
+			new Item('Ragnaros', 'Band of Accuria', 'https://classic.wowhead.com/item=17063'),
+			new Item('Ragnaros', 'Onslaught Girdle', 'https://classic.wowhead.com/item=19137'),
+			new Item('Shared', 'Quick Strike Ring', 'https://classic.wowhead.com/item=18821')
+		];
+
+		const ITEMS_BWL = [
+			new Item('Razorgore the Untamed', 'Arcane Infused Gem', 'https://classic.wowhead.com/item=19336'),
+			new Item('Razorgore the Untamed', 'Bindings of Transcendence', 'https://classic.wowhead.com/item=16926'),
+			new Item('Razorgore the Untamed', 'Bloodfang Bracers', 'https://classic.wowhead.com/item=16911'),
+			new Item('Razorgore the Untamed', 'Bracelets of Wrath', 'https://classic.wowhead.com/item=16959'),
+			new Item('Razorgore the Untamed', 'Dragonstalker\'s Bracers', 'https://classic.wowhead.com/item=16935'),
+			new Item('Razorgore the Untamed', 'Gloves of Rapid Evolution', 'https://classic.wowhead.com/item=19369'),
+			new Item('Razorgore the Untamed', 'Judgement Bindings', 'https://classic.wowhead.com/item=16951'),
+			new Item('Razorgore the Untamed', 'Mantle of the Blackwing Cabal', 'https://classic.wowhead.com/item=19370'),
+			new Item('Razorgore the Untamed', 'Nemesis Bracers', 'https://classic.wowhead.com/item=16934'),
+			new Item('Razorgore the Untamed', 'Netherwind Bindings', 'https://classic.wowhead.com/item=16918'),
+			new Item('Razorgore the Untamed', 'Spineshatter', 'https://classic.wowhead.com/item=19335'),
+			new Item('Razorgore the Untamed', 'Stormrage Bracers', 'https://classic.wowhead.com/item=16904'),
+			new Item('Razorgore the Untamed', 'The Black Book', 'https://classic.wowhead.com/item=19337'),
+			new Item('Razorgore the Untamed', 'The Untamed Blade', 'https://classic.wowhead.com/item=19334'),
+
+			new Item('Vaelastrasz the Corrupt', 'Belt of Transcendence', 'https://classic.wowhead.com/item=16925'),
+			new Item('Vaelastrasz the Corrupt', 'Bloodfang Belt', 'https://classic.wowhead.com/item=16910'),
+			new Item('Vaelastrasz the Corrupt', 'Dragonfang Blade', 'https://classic.wowhead.com/item=19346'),
+			new Item('Vaelastrasz the Corrupt', 'Dragonstalker\'s Belt', 'https://classic.wowhead.com/item=16936'),
+			new Item('Vaelastrasz the Corrupt', 'Helm of Endless Rage', 'https://classic.wowhead.com/item=19372'),
+			new Item('Vaelastrasz the Corrupt', 'Judgement Belt', 'https://classic.wowhead.com/item=16952'),
+			new Item('Vaelastrasz the Corrupt', 'Mind Quickening Gem', 'https://classic.wowhead.com/item=19339'),
+			new Item('Vaelastrasz the Corrupt', 'Nemesis Belt', 'https://classic.wowhead.com/item=16933'),
+			new Item('Vaelastrasz the Corrupt', 'Netherwind Belt', 'https://classic.wowhead.com/item=16818'),
+			new Item('Vaelastrasz the Corrupt', 'Pendant of the Fallen Dragon', 'https://classic.wowhead.com/item=19371'),
+			new Item('Vaelastrasz the Corrupt', 'Red Dragonscale Protector', 'https://classic.wowhead.com/item=19348'),
+			new Item('Vaelastrasz the Corrupt', 'Rune of Metamorphosis', 'https://classic.wowhead.com/item=19340'),
+			new Item('Vaelastrasz the Corrupt', 'Stormrage Belt', 'https://classic.wowhead.com/item=16903'),
+			new Item('Vaelastrasz the Corrupt', 'Waistband of Wrath', 'https://classic.wowhead.com/item=16960'),
+
+			new Item('Broodlord Lashlayer', 'Black Brood Pauldrons', 'https://classic.wowhead.com/item=19373'),
+			new Item('Broodlord Lashlayer', 'Bloodfang Boots', 'https://classic.wowhead.com/item=16906'),
+			new Item('Broodlord Lashlayer', 'Boots of Transcendence', 'https://classic.wowhead.com/item=16919'),
+			new Item('Broodlord Lashlayer', 'Bracers of Arcane Accuracy', 'https://classic.wowhead.com/item=19374'),
+			new Item('Broodlord Lashlayer', 'Dragonstalker\'s Greaves', 'https://classic.wowhead.com/item=16941'),
+			new Item('Broodlord Lashlayer', 'Head of the Broodlord Lashlayer', 'https://classic.wowhead.com/item=20383'),
+			new Item('Broodlord Lashlayer', 'Heartstriker', 'https://classic.wowhead.com/item=19350'),
+			new Item('Broodlord Lashlayer', 'Judgement Sabatons', 'https://classic.wowhead.com/item=16957'),
+			new Item('Broodlord Lashlayer', 'Lifegiving Gem', 'https://classic.wowhead.com/item=19341'),
+			new Item('Broodlord Lashlayer', 'Maladath, Runed Blade of the Black Flight', 'https://classic.wowhead.com/item=19351'),
+			new Item('Broodlord Lashlayer', 'Nemesis Boots', 'https://classic.wowhead.com/item=16927'),
+			new Item('Broodlord Lashlayer', 'Netherwind Boots', 'https://classic.wowhead.com/item=16912'),
+			new Item('Broodlord Lashlayer', 'Sabatons of Wrath', 'https://classic.wowhead.com/item=16965'),
+			new Item('Broodlord Lashlayer', 'Stormrage Boots', 'https://classic.wowhead.com/item=16898'),
+			new Item('Broodlord Lashlayer', 'Venomous Totem', 'https://classic.wowhead.com/item=19342'),
+
+			new Item('Firemaw', 'Black Ash Robe', 'https://classic.wowhead.com/item=19399'),
+			new Item('Firemaw', 'Claw of the Black Drake', 'https://classic.wowhead.com/item=19365'),
+			new Item('Firemaw', 'Cloak of Firemaw', 'https://classic.wowhead.com/item=19398'),
+			new Item('Firemaw', 'Firemaw\'s Clutch', 'https://classic.wowhead.com/item=19400'),
+			new Item('Firemaw', 'Legguards of the Fallen Crusader', 'https://classic.wowhead.com/item=19402'),
+			new Item('Firemaw', 'Primalist\'s Linked Legguards', 'https://classic.wowhead.com/item=19401'),
+			new Item('Firemaw', 'Scrolls of Blinding Light', 'https://classic.wowhead.com/item=19343'),
+
+			new Item('Ebonroc', 'Aegis of Preservation', 'https://classic.wowhead.com/item=19345'),
+			new Item('Ebonroc', 'Band of Forced Concentration', 'https://classic.wowhead.com/item=19403'),
+			new Item('Ebonroc', 'Dragonbreath Hand Cannon', 'https://classic.wowhead.com/item=19368'),
+			new Item('Ebonroc', 'Drake Fang Talisman', 'https://classic.wowhead.com/item=19406'),
+			new Item('Ebonroc', 'Ebony Flame Gloves', 'https://classic.wowhead.com/item=19407'),
+			new Item('Ebonroc', 'Malfurion\'s Blessed Bulwark', 'https://classic.wowhead.com/item=19405'),
+
+			new Item('Flamegor', 'Circle of Applied Force', 'https://classic.wowhead.com/item=19432'),
+			new Item('Flamegor', 'Dragon\'s Touch', 'https://classic.wowhead.com/item=19367'),
+			new Item('Flamegor', 'Emberweave Leggings', 'https://classic.wowhead.com/item=19433'),
+			new Item('Flamegor', 'Herald of Woe', 'https://classic.wowhead.com/item=19357'),
+			new Item('Flamegor', 'Shroud of Pure Thought', 'https://classic.wowhead.com/item=19430'),
+			new Item('Flamegor', 'Styleen\'s Impeding Scarab', 'https://classic.wowhead.com/item=19431'),
+
+			new Item('Chromaggus', 'Angelista\'s Grasp', 'https://classic.wowhead.com/item=19388'),
+			new Item('Chromaggus', 'Ashjre\'thul, Crossbow of Smiting', 'https://classic.wowhead.com/item=19361'),
+			new Item('Chromaggus', 'Bloodfang Spaulders', 'https://classic.wowhead.com/item=16832'),
+			new Item('Chromaggus', 'Chromatic Boots', 'https://classic.wowhead.com/item=19387'),
+			new Item('Chromaggus', 'Chromatically Tempered Sword', 'https://classic.wowhead.com/item=19352'),
+			new Item('Chromaggus', 'Claw of Chromaggus', 'https://classic.wowhead.com/item=19347'),
+			new Item('Chromaggus', 'Dragonstalker\'s Spaulders', 'https://classic.wowhead.com/item=16937'),
+			new Item('Chromaggus', 'Elementium Reinforced Bulwark', 'https://classic.wowhead.com/item=19349'),
+			new Item('Chromaggus', 'Elementium Threaded Cloak', 'https://classic.wowhead.com/item=19386'),
+			new Item('Chromaggus', 'Empowered Leggings', 'https://classic.wowhead.com/item=19385'),
+			new Item('Chromaggus', 'Girdle of the Fallen Crusader', 'https://classic.wowhead.com/item=19392'),
+			new Item('Chromaggus', 'Judgement Spaulders', 'https://classic.wowhead.com/item=16953'),
+			new Item('Chromaggus', 'Nemesis Spaulders', 'https://classic.wowhead.com/item=16932'),
+			new Item('Chromaggus', 'Netherwind Mantle', 'https://classic.wowhead.com/item=16917'),
+			new Item('Chromaggus', 'Pauldrons of Transcendence', 'https://classic.wowhead.com/item=16924'),
+			new Item('Chromaggus', 'Pauldrons of Wrath', 'https://classic.wowhead.com/item=16961'),
+			new Item('Chromaggus', 'Primalist\'s Linked Waistguard', 'https://classic.wowhead.com/item=19393'),
+			new Item('Chromaggus', 'Shimmering Geta', 'https://classic.wowhead.com/item=19391'),
+			new Item('Chromaggus', 'Stormrage Pauldrons', 'https://classic.wowhead.com/item=16902'),
+			new Item('Chromaggus', 'Taut Dragonhide Gloves', 'https://classic.wowhead.com/item=19390'),
+			new Item('Chromaggus', 'Taut Dragonhide Shoulderpads', 'https://classic.wowhead.com/item=19389'),
+
+			new Item('Nefarian', 'Archimtiros\' Ring of Reckoning', 'https://classic.wowhead.com/item=19376'),
+			new Item('Nefarian', 'Ashkandi, Greatsword of the Brotherhood', 'https://classic.wowhead.com/item=19364'),
+			new Item('Nefarian', 'Bloodfang Chestpiece', 'https://classic.wowhead.com/item=16905'),
+			new Item('Nefarian', 'Boots of the Shadow Flame', 'https://classic.wowhead.com/item=19381'),
+			new Item('Nefarian', 'Breastplate of Wrath', 'https://classic.wowhead.com/item=16966'),
+			new Item('Nefarian', 'Cloak of the Brood Lord', 'https://classic.wowhead.com/item=19378'),
+			new Item('Nefarian', 'Crul\'shorukh, Edge of Chaos', 'https://classic.wowhead.com/item=19363'),
+			new Item('Nefarian', 'Dragonstalker\'s Breastplate', 'https://classic.wowhead.com/item=16942'),
+			new Item('Nefarian', 'Head of Nefarian', 'https://classic.wowhead.com/item=19003'),
+			new Item('Nefarian', 'Judgement Breastplate', 'https://classic.wowhead.com/item=16958'),
+			new Item('Nefarian', 'Lok\'amir il Romathis', 'https://classic.wowhead.com/item=19360'),
+			new Item('Nefarian', 'Mish\'undare, Circlet of the Mind Flayer', 'https://classic.wowhead.com/item=19375'),
+			new Item('Nefarian', 'Neltharion\'s Tear', 'https://classic.wowhead.com/item=19379'),
+			new Item('Nefarian', 'Nemesis Robes', 'https://classic.wowhead.com/item=16931'),
+			new Item('Nefarian', 'Netherwind Robes', 'https://classic.wowhead.com/item=16916'),
+			new Item('Nefarian', 'Prestor\'s Talisman of Connivery', 'https://classic.wowhead.com/item=19377'),
+			new Item('Nefarian', 'Pure Elementium Band', 'https://classic.wowhead.com/item=19382'),
+			new Item('Nefarian', 'Robes of Transcendence', 'https://classic.wowhead.com/item=16923'),
+			new Item('Nefarian', 'Staff of the Shadow Flame', 'https://classic.wowhead.com/item=19356'),
+			new Item('Nefarian', 'Stormrage Chestguard', 'https://classic.wowhead.com/item=16897'),
+			new Item('Nefarian', 'Therazane\'s Link', 'https://classic.wowhead.com/item=19380'),
+
+			new Item('Shared', 'Bloodfang Gloves', 'https://classic.wowhead.com/item=16907'),
+			new Item('Shared', 'Dragonstalker\'s Gauntlets', 'https://classic.wowhead.com/item=16940'),
+			new Item('Shared', 'Drake Talon Cleaver', 'https://classic.wowhead.com/item=19353'),
+			new Item('Shared', 'Drake Talon Pauldrons', 'https://classic.wowhead.com/item=19394'),
+			new Item('Shared', 'Gauntlets of Wrath', 'https://classic.wowhead.com/item=16964'),
+			new Item('Shared', 'Handguards of Transcendence', 'https://classic.wowhead.com/item=16920'),
+			new Item('Shared', 'Judgement Gauntlets', 'https://classic.wowhead.com/item=16956'),
+			new Item('Shared', 'Nemesis Gloves', 'https://classic.wowhead.com/item=16928'),
+			new Item('Shared', 'Netherwind Gloves', 'https://classic.wowhead.com/item=16913'),
+			new Item('Shared', 'Rejuvenating Gem', 'https://classic.wowhead.com/item=19395'),
+			new Item('Shared', 'Ring of Blackrock', 'https://classic.wowhead.com/item=19397'),
+			new Item('Shared', 'Shadow Wing Focus Staff', 'https://classic.wowhead.com/item=19355'),
+			new Item('Shared', 'Stormrage Handguards', 'https://classic.wowhead.com/item=16899'),
+			new Item('Shared', 'Taut Dragonhide Belt', 'https://classic.wowhead.com/item=19396'),
+
+			new Item('Trash', 'Band of Dark Dominion', 'https://classic.wowhead.com/item=19434'),
+			new Item('Trash', 'Boots of Pure Thought', 'https://classic.wowhead.com/item=19437'),
+			new Item('Trash', 'Cloak of Draconic Might', 'https://classic.wowhead.com/item=19436'),
+			new Item('Trash', 'Doom\'s Edge', 'https://classic.wowhead.com/item=19362'),
+			new Item('Trash', 'Draconic Avenger', 'https://classic.wowhead.com/item=19354'),
+			new Item('Trash', 'Draconic Maul', 'https://classic.wowhead.com/item=19358'),
+			new Item('Trash', 'Elementium Ore', 'https://classic.wowhead.com/item=18562'),
+			new Item('Trash', 'Essence Gatherer', 'https://classic.wowhead.com/item=19435'),
+			new Item('Trash', 'Interlaced Shadow Jerkin', 'https://classic.wowhead.com/item=19439'),
+			new Item('Trash', 'Ringo\'s Blizzard Boots', 'https://classic.wowhead.com/item=19438')
+		];
+
+		const ITEMS_AQ40 = [];
+
+		const ITEMS_NAXX_SPIDER_WING = [
 			new Item('Anub\'Rekhan', 'Band of Unanswered Prayers', 'https://classic.wowhead.com/item=22939'),
 			new Item('Anub\'Rekhan', 'Cryptfiend Silk Cloak', 'https://classic.wowhead.com/item=22938'),
 			new Item('Anub\'Rekhan', 'Gem of Nerubis', 'https://classic.wowhead.com/item=22937'),
@@ -55,7 +205,7 @@
 			new Item('Maexxna', 'Wraith Blade', 'https://classic.wowhead.com/item=22807')
 		];
 
-		const itemsPlagueWing = [
+		const ITEMS_NAXX_PLAGUE_WING = [
 			new Item('Noth the Plaguebringer', 'Band of the Inevitable', 'https://classic.wowhead.com/item=23031'),
 			new Item('Noth the Plaguebringer', 'Cloak of the Scourge', 'https://classic.wowhead.com/item=23030'),
 			new Item('Noth the Plaguebringer', 'Hailstone Band', 'https://classic.wowhead.com/item=23028'),
@@ -80,7 +230,7 @@
 			new Item('Loatheb', 'The Eye of Nerub', 'https://classic.wowhead.com/item=23039')
 		];
 
-		const itemsDeathknightWing = [
+		const ITEMS_NAXX_DEATHKNIGHT_WING = [
 			new Item('Instructor Razuvious', 'Girdle of the Mentor', 'https://classic.wowhead.com/item=23219'),
 			new Item('Instructor Razuvious', 'Iblis, Blade of the Fallen Seraph', 'https://classic.wowhead.com/item=23014'),
 			new Item('Instructor Razuvious', 'Idol of Longevity', 'https://classic.wowhead.com/item=23004'),
@@ -105,7 +255,7 @@
 			new Item('The Four Horsemen', 'Warmth of Forgiveness', 'https://classic.wowhead.com/item=23027')
 		];
 
-		const itemsAbominationWing = [
+		const ITEMS_NAXX_ABOMINATION_WING = [
 			new Item('Patchwerk', 'Band of Reanimation', 'https://classic.wowhead.com/item=22961'),
 			new Item('Patchwerk', 'Cloak of Suturing', 'https://classic.wowhead.com/item=22960'),
 			new Item('Patchwerk', 'Severance', 'https://classic.wowhead.com/item=22815'),
@@ -134,7 +284,7 @@
 			new Item('Thaddius', 'The Castigator', 'https://classic.wowhead.com/item=22808')
 		];
 
-		const itemsFrostwyrmLair = [
+		const ITEMS_NAXX_FROSTWYRM_LAIR = [
 			new Item('Sapphiron', 'Claw of the Frost Wyrm', 'https://classic.wowhead.com/item=23242'),
 			new Item('Sapphiron', 'Cloak of the Necropolis', 'https://classic.wowhead.com/item=23050'),
 			new Item('Sapphiron', 'Eye of the Dead', 'https://classic.wowhead.com/item=23047'),
@@ -172,7 +322,7 @@
 			new Item('Kel\'Thuzad', 'The Phylactery of Kel\'Thuzad', 'https://classic.wowhead.com/item=22520')
 		];
 
-		const itemsTrashAndTier = [
+		const ITEMS_NAXX_TRASH_AND_TIER = [
 			new Item('Shared', 'Desecrated Belt', 'https://classic.wowhead.com/item=22370'),
 			new Item('Shared', 'Desecrated Bindings', 'https://classic.wowhead.com/item=22369'),
 			new Item('Shared', 'Desecrated Boots', 'https://classic.wowhead.com/item=22365'),
@@ -196,6 +346,39 @@
 			new Item('Trash', 'Spaulders of the Grand Crusader', 'https://classic.wowhead.com/item=23667'),
 			new Item('Trash', 'Stygian Buckler', 'https://classic.wowhead.com/item=23238')
 		];
+
+		const CONFIGS = {
+			BWL: {
+				spreadsheetId: '1l_ak2mtbyc1qWAhNnn7gh0pQ9Vu87QVSr8xcZRU9aeU',
+				range: 'Log!A3223:H',
+				logBlocks: 2,
+				sections: [
+					{ name: 'Blackwing Lair', items: ITEMS_BWL },
+					{ name: 'Molten Core', items: ITEMS_MC }
+				]
+			},
+			NAXX: {
+				spreadsheetId: '1s_Ja3ae3QePMox_8gMdkIfjLAVcxsLMVSAUdpbdP2to',
+				range: 'Log!A4114:H',
+				logBlocks: 1,
+				sections: [
+					{ name: 'Spider Wing', items: ITEMS_NAXX_SPIDER_WING },
+					{ name: 'Plague Wing', items: ITEMS_NAXX_PLAGUE_WING },
+					{ name: 'Deathknight Wing', items: ITEMS_NAXX_DEATHKNIGHT_WING },
+					{ name: 'Abomination Wing', items: ITEMS_NAXX_ABOMINATION_WING },
+					{ name: 'Frostwyrm Lair', items: ITEMS_NAXX_FROSTWYRM_LAIR },
+					{ name: 'Trash and Tier 3 items', items: ITEMS_NAXX_TRASH_AND_TIER },
+				]
+			}
+		};
+
+		//const config = CONFIGS.BWL;
+		//const config = CONFIGS.NAXX;
+
+		const urlParams = new URLSearchParams(window.location.search);
+		const urlParamRaid = urlParams.get('raid');
+		console.log(`URL Params: raid=${urlParamRaid}`);
+		const config = (CONFIGS[urlParamRaid]) ? CONFIGS[urlParamRaid] : CONFIGS.NAXX;
 
 		let gapiInited = false;
 
@@ -229,8 +412,8 @@
 			let response;
 			try {
 				response = await gapi.client.sheets.spreadsheets.values.get({
-					spreadsheetId: '1s_Ja3ae3QePMox_8gMdkIfjLAVcxsLMVSAUdpbdP2to',
-					range: 'Log!A4114:H',
+					spreadsheetId: config.spreadsheetId,
+					range: config.range
 				});
 
 				const range = response.result;
@@ -278,31 +461,34 @@
 			}
 		}
 
-		function processRange(range) {
-			console.log(`Range requested: ${range.range}`);
-			const rows = range.values;
+		function readLogBlock(rows, blockNumFromBottom, srData) {
+			console.log(`Reading block ${blockNumFromBottom}`);
 
-			// get last header (from bottom)
+			// get header row
 			let headerRowIdx = -1;
+			let blocksFound = 0;
 			for (let i = rows.length - 1; i >= 0; i--) {
 				const row = rows[i];
 				if (row.length > 0 && row[0] == '#') {
-					headerRowIdx = i;
-					break;
+					blocksFound++;
+					if (blocksFound == blockNumFromBottom) {
+						headerRowIdx = i;
+						break;
+					}
 				}
 			}
 
 			if (headerRowIdx === -1) {
-				console.log('Error: Header row not found');
-				return;
+				//console.log('Error: Header row not found');
+				throw 'Error: Header row not found';
 			}
 
 			const headerRow = rows[headerRowIdx];
 			console.log(`headerRowIdx: ${headerRowIdx}, header: ${headerRow}`);
 			const header = new HeaderMeta(headerRow);
 
-			// read data
-			const srData = [];
+			// read block data
+			let recordsFound = 0;
 			for (let i = headerRowIdx + 1; i < rows.length; i++) {
 				const row = rows[i];
 				if (row.length == 0) {
@@ -316,8 +502,20 @@
 					row[header.itemId],
 					Number(row[header.points])
 				));
+				recordsFound++;
 			}
-			console.log(`SrData items: ${srData.length}`);
+			console.log(`SrData items added: ${recordsFound}, total: ${srData.length}`);
+		}
+
+		function processRange(range) {
+			console.log(`Range requested: ${range.range}`);
+			const rows = range.values;
+
+			// read blocks
+			const srData = [];
+			for (let i = 1; i <= config.logBlocks; i++) {
+				readLogBlock(rows, i, srData);
+			}
 
 			if (srData.length == 0) {
 				showMessage('Parse error: no softres rows found');
@@ -352,12 +550,10 @@
 			const itemsElem = document.getElementById('items');
 			itemsElem.innerHTML = '';
 
-			doTheLayout(itemsElem, 'SpiderWing', itemsSpiderWing, groupByItemCollisionsOnly);
-			doTheLayout(itemsElem, 'PlagueWing', itemsPlagueWing, groupByItemCollisionsOnly);
-			doTheLayout(itemsElem, 'DeathknightWing', itemsDeathknightWing, groupByItemCollisionsOnly);
-			doTheLayout(itemsElem, 'AbominationWing', itemsAbominationWing, groupByItemCollisionsOnly);
-			doTheLayout(itemsElem, 'FrostwyrmLair', itemsFrostwyrmLair, groupByItemCollisionsOnly);
-			doTheLayout(itemsElem, 'TrashAndTier', itemsTrashAndTier, groupByItemCollisionsOnly);
+			for (let i = 0; i < config.sections.length; i++) {
+				const section = config.sections[i];
+				doTheLayout(itemsElem, section.name, section.items, groupByItemCollisionsOnly);
+			}
 		}
 
 		function doTheLayout(root, sectionName, sectionItems, groupByItemCollisionsOnly) {
