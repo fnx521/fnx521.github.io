@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.15</p>
+	<p>Sulfuras Points Cheatsheet, v0.0.16</p>
 	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
 	<div id="message"></div>
 	<div id="items"></div>
@@ -180,7 +180,152 @@
 			new Item('Trash', 'Ringo\'s Blizzard Boots', 'https://classic.wowhead.com/item=19438')
 		];
 
-		const ITEMS_AQ40 = [];
+		const ITEMS_AQ40 = [
+			new Item('The Prophet Skeram', 'Amulet of Foul Warding', 'https://classic.wowhead.com/item=21702'),
+			new Item('The Prophet Skeram', 'Barrage Shoulders', 'https://classic.wowhead.com/item=21699'),
+			new Item('The Prophet Skeram', 'Beetle Scaled Wristguards', 'https://classic.wowhead.com/item=21708'),
+			new Item('The Prophet Skeram', 'Boots of the Fallen Prophet', 'https://classic.wowhead.com/item=21705'),
+			new Item('The Prophet Skeram', 'Boots of the Redeemed Prophecy', 'https://classic.wowhead.com/item=21704'),
+			new Item('The Prophet Skeram', 'Boots of the Unwavering Will', 'https://classic.wowhead.com/item=21706'),
+			new Item('The Prophet Skeram', 'Breastplate of Annihilation', 'https://classic.wowhead.com/item=21814'),
+			new Item('The Prophet Skeram', 'Cloak of Concentrated Hatred', 'https://classic.wowhead.com/item=21701'),
+			new Item('The Prophet Skeram', 'Hammer of Ji\'zhi', 'https://classic.wowhead.com/item=21703'),
+			new Item('The Prophet Skeram', 'Leggings of Immersion', 'https://classic.wowhead.com/item=21698'),
+			new Item('The Prophet Skeram', 'Pendant of the Qiraji Guardian', 'https://classic.wowhead.com/item=21700'),
+			new Item('The Prophet Skeram', 'Plans: Thick Obsidian Breastplate', 'https://classic.wowhead.com/item=22222'),
+			new Item('The Prophet Skeram', 'Ring of Swarming Thought', 'https://classic.wowhead.com/item=21707'),
+			new Item('The Prophet Skeram', 'Staff of the Qiraji Prophets', 'https://classic.wowhead.com/item=21128'),
+
+			new Item('Bug Trio', 'Angelista\'s Touch', 'https://classic.wowhead.com/item=21695'),
+			new Item('Bug Trio', 'Cape of the Trinity', 'https://classic.wowhead.com/item=21697'),
+			new Item('Bug Trio', 'Guise of the Devourer', 'https://classic.wowhead.com/item=21693'),
+			new Item('Bug Trio', 'Robes of the Triumvirate', 'https://classic.wowhead.com/item=21696'),
+			new Item('Bug Trio', 'Ternary Mantle', 'https://classic.wowhead.com/item=21694'),
+			new Item('Bug Trio', 'Triad Girdle', 'https://classic.wowhead.com/item=21692'),
+
+			new Item('Lord Kri', 'Petrified Scarab', 'https://classic.wowhead.com/item=21685'),
+			new Item('Lord Kri', 'Ring of the Devoured', 'https://classic.wowhead.com/item=21681'),
+			new Item('Lord Kri', 'Vest of Swift Execution', 'https://classic.wowhead.com/item=21680'),
+			new Item('Lord Kri', 'Wand of Qiraji Nobility', 'https://classic.wowhead.com/item=21603'),
+
+			new Item('Vem', 'Angelista\'s Charm', 'https://classic.wowhead.com/item=21690'),
+			new Item('Vem', 'Boots of the Fallen Hero', 'https://classic.wowhead.com/item=21688'),
+			new Item('Vem', 'Gloves of Ebru', 'https://classic.wowhead.com/item=21689'),
+			new Item('Vem', 'Ooze-ridden Gauntlets', 'https://classic.wowhead.com/item=21691'),
+
+			new Item('Princess Yauj', 'Bile-Covered Gauntlets', 'https://classic.wowhead.com/item=21682'),
+			new Item('Princess Yauj', 'Mantle of Phrenic Power', 'https://classic.wowhead.com/item=21686'),
+			new Item('Princess Yauj', 'Mantle of the Desert Crusade', 'https://classic.wowhead.com/item=21683'),
+			new Item('Princess Yauj', 'Mantle of the Desert\'s Fury', 'https://classic.wowhead.com/item=21684'),
+			new Item('Princess Yauj', 'Ukko\'s Ring of Darkness', 'https://classic.wowhead.com/item=21687'),
+
+			new Item('Battleguard Sartura', 'Badge of the Swarmguard', 'https://classic.wowhead.com/item=21670'),
+			new Item('Battleguard Sartura', 'Creeping Vine Helm', 'https://classic.wowhead.com/item=21669'),
+			new Item('Battleguard Sartura', 'Gauntlets of Steadfast Determination', 'https://classic.wowhead.com/item=21674'),
+			new Item('Battleguard Sartura', 'Gloves of Enforcement', 'https://classic.wowhead.com/item=21672'),
+			new Item('Battleguard Sartura', 'Leggings of the Festering Swarm', 'https://classic.wowhead.com/item=21676'),
+			new Item('Battleguard Sartura', 'Legplates of Blazing Light', 'https://classic.wowhead.com/item=21667'),
+			new Item('Battleguard Sartura', 'Necklace of Purity', 'https://classic.wowhead.com/item=21678'),
+			new Item('Battleguard Sartura', 'Recomposed Boots', 'https://classic.wowhead.com/item=21648'),
+			new Item('Battleguard Sartura', 'Robes of the Battleguard', 'https://classic.wowhead.com/item=21671'),
+			new Item('Battleguard Sartura', 'Sartura\'s Might', 'https://classic.wowhead.com/item=21666'),
+			new Item('Battleguard Sartura', 'Scaled Leggings of Qiraji Fury', 'https://classic.wowhead.com/item=21668'),
+			new Item('Battleguard Sartura', 'Silithid Claw', 'https://classic.wowhead.com/item=21673'),
+			new Item('Battleguard Sartura', 'Thick Qirajihide Belt', 'https://classic.wowhead.com/item=21675'),
+
+			new Item('Fankriss the Unyielding', 'Ancient Qiraji Ripper', 'https://classic.wowhead.com/item=21650'),
+			new Item('Fankriss the Unyielding', 'Barb of the Sand Reaver', 'https://classic.wowhead.com/item=21635'),
+			new Item('Fankriss the Unyielding', 'Barbed Choker', 'https://classic.wowhead.com/item=21664'),
+			new Item('Fankriss the Unyielding', 'Cloak of Untold Secrets', 'https://classic.wowhead.com/item=21627'),
+			new Item('Fankriss the Unyielding', 'Fetish of the Sand Reaver', 'https://classic.wowhead.com/item=21647'),
+			new Item('Fankriss the Unyielding', 'Hive Tunneler\'s Boots', 'https://classic.wowhead.com/item=21645'),
+			new Item('Fankriss the Unyielding', 'Libram of Grace', 'https://classic.wowhead.com/item=22402'),
+			new Item('Fankriss the Unyielding', 'Mantle of Wicked Revenge', 'https://classic.wowhead.com/item=21665'),
+			new Item('Fankriss the Unyielding', 'Pauldrons of the Unrelenting', 'https://classic.wowhead.com/item=21639'),
+			new Item('Fankriss the Unyielding', 'Robes of the Guardian Saint', 'https://classic.wowhead.com/item=21663'),
+			new Item('Fankriss the Unyielding', 'Scaled Sand Reaver Leggings', 'https://classic.wowhead.com/item=21651'),
+			new Item('Fankriss the Unyielding', 'Silithid Carapace Chestguard', 'https://classic.wowhead.com/item=21652'),
+			new Item('Fankriss the Unyielding', 'Totem of Life', 'https://classic.wowhead.com/item=22396'),
+
+			new Item('Viscidus', 'Gauntlets of Kalimdor', 'https://classic.wowhead.com/item=21624'),
+			new Item('Viscidus', 'Gauntlets of the Righteous Champion', 'https://classic.wowhead.com/item=21623'),
+			new Item('Viscidus', 'Idol of Health', 'https://classic.wowhead.com/item=22399'),
+			new Item('Viscidus', 'Ring of the Qiraji Fury', 'https://classic.wowhead.com/item=21677'),
+			new Item('Viscidus', 'Scarab Brooch', 'https://classic.wowhead.com/item=21625'),
+			new Item('Viscidus', 'Sharpened Silithid Femur', 'https://classic.wowhead.com/item=21622'),
+			new Item('Viscidus', 'Slime-coated Leggings', 'https://classic.wowhead.com/item=21626'),
+
+			new Item('Princess Huhuran', 'Cloak of the Golden Hive', 'https://classic.wowhead.com/item=21621'),
+			new Item('Princess Huhuran', 'Gloves of the Messiah', 'https://classic.wowhead.com/item=21619'),
+			new Item('Princess Huhuran', 'Hive Defiler Wristguards', 'https://classic.wowhead.com/item=21618'),
+			new Item('Princess Huhuran', 'Huhuran\'s Stinger', 'https://classic.wowhead.com/item=21616'),
+			new Item('Princess Huhuran', 'Ring of the Martyr', 'https://classic.wowhead.com/item=21620'),
+			new Item('Princess Huhuran', 'Wasphide Gauntlets', 'https://classic.wowhead.com/item=21617'),
+
+			new Item('Ouro', 'Burrower Bracers', 'https://classic.wowhead.com/item=21611'),
+			new Item('Ouro', 'Don Rigoberto\'s Lost Hat', 'https://classic.wowhead.com/item=21615'),
+			new Item('Ouro', 'Jom Gabbar', 'https://classic.wowhead.com/item=23570'),
+			new Item('Ouro', 'Larvae of the Great Worm', 'https://classic.wowhead.com/item=23557'),
+			new Item('Ouro', 'Ouro\'s Intact Hide', 'https://classic.wowhead.com/item=20927'),
+			new Item('Ouro', 'Skin of the Great Sandworm', 'https://classic.wowhead.com/item=20931'),
+			new Item('Ouro', 'The Burrower\'s Shell', 'https://classic.wowhead.com/item=23558'),
+			new Item('Ouro', 'Wormscale Blocker', 'https://classic.wowhead.com/item=21610'),
+
+			new Item('Twin Emperors', 'Amulet of Vek\'nilash', 'https://classic.wowhead.com/item=21608'),
+			new Item('Twin Emperors', 'Belt of the Fallen Emperor', 'https://classic.wowhead.com/item=21606'),
+			new Item('Twin Emperors', 'Boots of Epiphany', 'https://classic.wowhead.com/item=21600'),
+			new Item('Twin Emperors', 'Bracelets of Royal Redemption', 'https://classic.wowhead.com/item=21604'),
+			new Item('Twin Emperors', 'Formula: Enchant Cloak - Subtlety', 'https://classic.wowhead.com/item=20735'),
+			new Item('Twin Emperors', 'Formula: Enchant Gloves - Threat', 'https://classic.wowhead.com/item=20726'),
+			new Item('Twin Emperors', 'Gloves of the Hidden Temple', 'https://classic.wowhead.com/item=21605'),
+			new Item('Twin Emperors', 'Grasp of the Fallen Emperor', 'https://classic.wowhead.com/item=21607'),
+			new Item('Twin Emperors', 'Kalimdor\'s Revenge', 'https://classic.wowhead.com/item=21679'),
+			new Item('Twin Emperors', 'Qiraji Execution Bracers', 'https://classic.wowhead.com/item=21602'),
+			new Item('Twin Emperors', 'Regenerating Belt of Vek\'nilash', 'https://classic.wowhead.com/item=21609'),
+			new Item('Twin Emperors', 'Ring of Emperor Vek\'lor', 'https://classic.wowhead.com/item=21601'),
+			new Item('Twin Emperors', 'Royal Qiraji Belt', 'https://classic.wowhead.com/item=21598'),
+			new Item('Twin Emperors', 'Royal Scepter of Vek\'lor', 'https://classic.wowhead.com/item=21597'),
+			new Item('Twin Emperors', 'Vek\'lor\'s Diadem', 'https://classic.wowhead.com/item=20930'),
+			new Item('Twin Emperors', 'Vek\'lor\'s Gloves of Devastation', 'https://classic.wowhead.com/item=21599'),
+			new Item('Twin Emperors', 'Vek\'nilash\'s Circlet', 'https://classic.wowhead.com/item=20926'),
+
+			new Item('C\'Thun', 'Belt of Never-ending Agony', 'https://classic.wowhead.com/item=21586'),
+			new Item('C\'Thun', 'Carapace of the Old God', 'https://classic.wowhead.com/item=20929'),
+			new Item('C\'Thun', 'Cloak of Clarity', 'https://classic.wowhead.com/item=21583'),
+			new Item('C\'Thun', 'Cloak of the Devoured', 'https://classic.wowhead.com/item=22731'),
+			new Item('C\'Thun', 'Dark Edge of Insanity', 'https://classic.wowhead.com/item=21134'),
+			new Item('C\'Thun', 'Dark Storm Gauntlets', 'https://classic.wowhead.com/item=21585'),
+			new Item('C\'Thun', 'Death\'s Sting', 'https://classic.wowhead.com/item=21126'),
+			new Item('C\'Thun', 'Eye of C\'Thun', 'https://classic.wowhead.com/item=21221'),
+			new Item('C\'Thun', 'Eyestalk Waist Cord', 'https://classic.wowhead.com/item=22730'),
+			new Item('C\'Thun', 'Gauntlets of Annihilation', 'https://classic.wowhead.com/item=21581'),
+			new Item('C\'Thun', 'Grasp of the Old God', 'https://classic.wowhead.com/item=21582'),
+			new Item('C\'Thun', 'Husk of the Old God', 'https://classic.wowhead.com/item=20933'),
+			new Item('C\'Thun', 'Mark of C\'Thun', 'https://classic.wowhead.com/item=22732'),
+			new Item('C\'Thun', 'Ring of the Godslayer', 'https://classic.wowhead.com/item=21596'),
+			new Item('C\'Thun', 'Scepter of the False Prophet', 'https://classic.wowhead.com/item=21839'),
+			new Item('C\'Thun', 'Vanquished Tentacle of C\'Thun', 'https://classic.wowhead.com/item=21579'),
+
+			new Item('Shared', 'Formula: Enchant Cloak - Dodge', 'https://classic.wowhead.com/item=20736'),
+			new Item('Shared', 'Formula: Enchant Cloak - Stealth', 'https://classic.wowhead.com/item=20734'),
+			new Item('Shared', 'Formula: Enchant Gloves - Fire Power', 'https://classic.wowhead.com/item=20729'),
+			new Item('Shared', 'Formula: Enchant Gloves - Frost Power', 'https://classic.wowhead.com/item=20728'),
+			new Item('Shared', 'Formula: Enchant Gloves - Healing Power', 'https://classic.wowhead.com/item=20730'),
+			new Item('Shared', 'Formula: Enchant Gloves - Shadow Power', 'https://classic.wowhead.com/item=20727'),
+			new Item('Shared', 'Formula: Enchant Gloves - Superior Agility', 'https://classic.wowhead.com/item=20731'),
+			new Item('Shared', 'Imperial Qiraji Armaments', 'https://classic.wowhead.com/item=21232'),
+			new Item('Shared', 'Imperial Qiraji Regalia', 'https://classic.wowhead.com/item=21237'),
+			new Item('Shared', 'Qiraji Bindings of Command', 'https://classic.wowhead.com/item=20928'),
+			new Item('Shared', 'Qiraji Bindings of Dominance', 'https://classic.wowhead.com/item=20932'),
+
+			new Item('Trash', 'Anubisath Warhammer', 'https://classic.wowhead.com/item=21837'),
+			new Item('Trash', 'Garb of Royal Ascension', 'https://classic.wowhead.com/item=21838'),
+			new Item('Trash', 'Gloves of the Immortal', 'https://classic.wowhead.com/item=21888'),
+			new Item('Trash', 'Gloves of the Redeemed Prophecy', 'https://classic.wowhead.com/item=21889'),
+			new Item('Trash', 'Neretzek, The Blood Drinker', 'https://classic.wowhead.com/item=21856'),
+			new Item('Trash', 'Ritssyn\'s Ring of Chaos', 'https://classic.wowhead.com/item=21836'),
+			new Item('Trash', 'Shard of the Fallen Star', 'https://classic.wowhead.com/item=21891')
+		];
 
 		const ITEMS_NAXX_SPIDER_WING = [
 			new Item('Anub\'Rekhan', 'Band of Unanswered Prayers', 'https://classic.wowhead.com/item=22939'),
@@ -355,6 +500,14 @@
 				sections: [
 					{ name: 'Blackwing Lair', items: ITEMS_BWL },
 					{ name: 'Molten Core', items: ITEMS_MC }
+				]
+			},
+			AQ40: {
+				spreadsheetId: '1rHYx2Sjc5gh8q7WynWovDk1P7xvLakoKfcxUmFKs4Y4',
+				range: 'Log!A3540:H',
+				logBlocks: 1,
+				sections: [
+					{ name: 'Temple of Ahn\'Qiraj', items: ITEMS_AQ40 }
 				]
 			},
 			NAXX: {
