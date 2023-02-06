@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.16</p>
+	<p>Sulfuras Points Cheatsheet, v0.0.17</p>
 	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
 	<div id="message"></div>
 	<div id="items"></div>
@@ -729,6 +729,7 @@
 					p.appendChild(div2);
 					p.appendChild(div3);
 
+					let resultSuppliers = [];
 					for (let j = 0; j < players.length; j++) {
 						const sr = players[j];
 
@@ -751,7 +752,53 @@
 						});
 
 						p.appendChild(div);
+
+						resultSuppliers.push({
+							getPoints: () => {
+								const val = parseInt(input.value);
+								return (isNaN(val) ? 0 : val);
+							},
+							getMessage: () => {
+								let val = parseInt(input.value);
+								if (isNaN(val)) {
+									return null;
+								}
+								return `${sr.name} (${sr.class}): ${sr.points} + ${val} = ${sr.points + val}`;
+							}
+						});
 					}
+
+					// create announce button
+					let btn = document.createElement('button');
+					btn.innerHTML = 'Announce';
+					btn.addEventListener("click", () => {
+						//console.log(`Announce ${item.name}`);
+						let fullMsg = `/ra --- Results for [${item.name}] ---`;
+						let results = [];
+						for (let i = 0; i < resultSuppliers.length; i++) {
+							const supplier = resultSuppliers[i];
+							const msg = supplier.getMessage();
+							if (msg) {
+								results.push({
+									k: supplier.getPoints(),
+									v: msg
+								});
+							}
+						}
+
+						results.sort((a, b) => {
+							console.log(`Sort a > b`);
+							return (a.k < b.k) ? 1 : -1;
+						});
+
+						for (let i = 0; i < results.length; i++) {
+							const res = results[i];
+							fullMsg += '\n/ra ' + res.v;
+						}
+
+						console.log(`${fullMsg}`);
+					});
+					p.appendChild(btn);
 
 					children.push(p);
 				}
