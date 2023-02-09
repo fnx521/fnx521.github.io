@@ -4,21 +4,112 @@
 <head>
 	<title>Sulfuras Points Cheatsheet</title>
 	<meta charset="utf-8" />
+	<style>
+		body {
+			background-color: rgb(34, 34, 34);
+			color: rgb(255, 255, 255);
+			font-family: Arial, sans-serif;
+		}
+
+		#wrapper {
+			max-width: 1160px;
+			margin: 0 auto;
+		}
+
+		#sections-container {
+			foo: bar;
+		}
+
+		.items-container {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		p.contested-item {
+			width: 340px;
+			border: 1px solid black;
+			border-radius: 4px;
+			padding: 10px;
+			margin: 10px;
+
+			background-color: rgb(37, 37, 37);
+			box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 2px;
+			border-radius: 5px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: rgb(68, 68, 68);
+		}
+
+		input.roll {
+			width: 26px;
+			border: 1px solid gray;
+			border-radius: 4px;
+			text-align: center;
+		}
+
+		.druid {
+			color: rgb(255, 125, 10);
+		}
+
+		.hunter {
+			color: rgb(169, 210, 113);
+		}
+
+		.mage {
+			color: rgb(64, 199, 235);
+		}
+
+		.paladin {
+			color: rgb(245, 140, 186);
+		}
+
+		.priest {
+			color: rgb(255, 255, 255);
+		}
+
+		.rogue {
+			color: rgb(255, 245, 105);
+		}
+
+		.warlock {
+			color: rgb(135, 135, 237);
+		}
+
+		.warrior {
+			color: rgb(199, 156, 110);
+		}
+
+		.q3 {
+			color: rgb(0, 112, 221) !important;
+		}
+
+		.q4 {
+			color: rgb(163, 53, 238) !important;
+		}
+	</style>
+	<script>const whTooltips = {colorLinks: true, iconizeLinks: true, renameLinks: true};</script>
+	<script src="https://wow.zamimg.com/js/tooltips.js"></script>
 </head>
 
 <body>
-	<p>Sulfuras Points Cheatsheet, v0.0.17</p>
-	<!-- <pre id="content" style="white-space: pre-wrap;"></pre> -->
-	<div id="message"></div>
-	<div id="items"></div>
+	<div id="wrapper">
+		<p>Sulfuras Points Cheatsheet, v0.0.18</p>
+		<div id="message"></div>
+		<div id="sections-container"></div>
+	</div>
 
 	<script type="text/javascript">
 		const API_KEY = 'AIzaSyCNAFRhLa3kMQVTBJsf4-b7yrwlA3PLFDw';
 		const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
 		const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
 
+		const QUALITY_RARE = 3;
+		const QUALITY_EPIC = 4;
+
 		class Item {
-			constructor(boss, name, link) {
+			constructor(boss, name, link, quality) {
 				this.boss = boss;
 				this.name = name;
 				this.link = link;
@@ -29,6 +120,8 @@
 				}
 
 				this.id = match[0].split('=')[1];
+
+				this.quality = quality ? quality : QUALITY_EPIC;
 			}
 		}
 
@@ -275,8 +368,8 @@
 			new Item('Twin Emperors', 'Belt of the Fallen Emperor', 'https://classic.wowhead.com/item=21606'),
 			new Item('Twin Emperors', 'Boots of Epiphany', 'https://classic.wowhead.com/item=21600'),
 			new Item('Twin Emperors', 'Bracelets of Royal Redemption', 'https://classic.wowhead.com/item=21604'),
-			new Item('Twin Emperors', 'Formula: Enchant Cloak - Subtlety', 'https://classic.wowhead.com/item=20735'),
-			new Item('Twin Emperors', 'Formula: Enchant Gloves - Threat', 'https://classic.wowhead.com/item=20726'),
+			new Item('Twin Emperors', 'Formula: Enchant Cloak - Subtlety', 'https://classic.wowhead.com/item=20735', QUALITY_RARE),
+			new Item('Twin Emperors', 'Formula: Enchant Gloves - Threat', 'https://classic.wowhead.com/item=20726', QUALITY_RARE),
 			new Item('Twin Emperors', 'Gloves of the Hidden Temple', 'https://classic.wowhead.com/item=21605'),
 			new Item('Twin Emperors', 'Grasp of the Fallen Emperor', 'https://classic.wowhead.com/item=21607'),
 			new Item('Twin Emperors', 'Kalimdor\'s Revenge', 'https://classic.wowhead.com/item=21679'),
@@ -306,13 +399,13 @@
 			new Item('C\'Thun', 'Scepter of the False Prophet', 'https://classic.wowhead.com/item=21839'),
 			new Item('C\'Thun', 'Vanquished Tentacle of C\'Thun', 'https://classic.wowhead.com/item=21579'),
 
-			new Item('Shared', 'Formula: Enchant Cloak - Dodge', 'https://classic.wowhead.com/item=20736'),
-			new Item('Shared', 'Formula: Enchant Cloak - Stealth', 'https://classic.wowhead.com/item=20734'),
-			new Item('Shared', 'Formula: Enchant Gloves - Fire Power', 'https://classic.wowhead.com/item=20729'),
-			new Item('Shared', 'Formula: Enchant Gloves - Frost Power', 'https://classic.wowhead.com/item=20728'),
-			new Item('Shared', 'Formula: Enchant Gloves - Healing Power', 'https://classic.wowhead.com/item=20730'),
-			new Item('Shared', 'Formula: Enchant Gloves - Shadow Power', 'https://classic.wowhead.com/item=20727'),
-			new Item('Shared', 'Formula: Enchant Gloves - Superior Agility', 'https://classic.wowhead.com/item=20731'),
+			new Item('Shared', 'Formula: Enchant Cloak - Dodge', 'https://classic.wowhead.com/item=20736', QUALITY_RARE),
+			new Item('Shared', 'Formula: Enchant Cloak - Stealth', 'https://classic.wowhead.com/item=20734', QUALITY_RARE),
+			new Item('Shared', 'Formula: Enchant Gloves - Fire Power', 'https://classic.wowhead.com/item=20729', QUALITY_RARE),
+			new Item('Shared', 'Formula: Enchant Gloves - Frost Power', 'https://classic.wowhead.com/item=20728', QUALITY_RARE),
+			new Item('Shared', 'Formula: Enchant Gloves - Healing Power', 'https://classic.wowhead.com/item=20730', QUALITY_RARE),
+			new Item('Shared', 'Formula: Enchant Gloves - Shadow Power', 'https://classic.wowhead.com/item=20727', QUALITY_RARE),
+			new Item('Shared', 'Formula: Enchant Gloves - Superior Agility', 'https://classic.wowhead.com/item=20731', QUALITY_RARE),
 			new Item('Shared', 'Imperial Qiraji Armaments', 'https://classic.wowhead.com/item=21232'),
 			new Item('Shared', 'Imperial Qiraji Regalia', 'https://classic.wowhead.com/item=21237'),
 			new Item('Shared', 'Qiraji Bindings of Command', 'https://classic.wowhead.com/item=20928'),
@@ -700,13 +793,30 @@
 			console.log(`groupByItemCollisionsOnly keys: ${Object.keys(groupByItemCollisionsOnly).length}`);
 
 			// clean everything
-			const itemsElem = document.getElementById('items');
-			itemsElem.innerHTML = '';
+			const sectionsContainer = document.getElementById('sections-container');
+			sectionsContainer.innerHTML = '';
 
 			for (let i = 0; i < config.sections.length; i++) {
 				const section = config.sections[i];
-				doTheLayout(itemsElem, section.name, section.items, groupByItemCollisionsOnly);
+				doTheLayout(sectionsContainer, section.name, section.items, groupByItemCollisionsOnly);
 			}
+		}
+
+		function createElementA(href, text, title, clazz) {
+			const a = document.createElement('a');
+			a.appendChild(document.createTextNode(text));
+			a.href = href;
+			if (title) {
+				a.title = title;
+			}
+			if (typeof clazz === 'string') {
+				a.classList.add(clazz);
+			} else if (Array.isArray(clazz)) {
+				for (let i = 0; i < clazz.length; i++) {
+					a.classList.add(clazz[i]);
+				}
+			}
+			return a;
 		}
 
 		function doTheLayout(root, sectionName, sectionItems, groupByItemCollisionsOnly) {
@@ -716,18 +826,18 @@
 				const item = sectionItems[i];
 				const players = groupByItemCollisionsOnly[item.id];
 				if (players) {
-					let p = document.createElement('p');
+					let itemBlock = document.createElement('p');
+					itemBlock.classList.add('contested-item');
 
-					let div1 = document.createElement('div');
-					div1.appendChild(document.createTextNode('Boss: ' + item.boss));
-					let div2 = document.createElement('div');
-					div2.appendChild(document.createTextNode('ItemId: ' + item.id));
-					let div3 = document.createElement('div');
-					div3.appendChild(document.createTextNode('ItemName: ' + item.name));
+					let divItemName = document.createElement('div');
+					divItemName.appendChild(createElementA(item.link, item.name, null, ['item-name', 'q' + item.quality]));
 
-					p.appendChild(div1);
-					p.appendChild(div2);
-					p.appendChild(div3);
+					let divBoss = document.createElement('div');
+					divBoss.appendChild(document.createTextNode('Source: ' + item.boss));
+					divBoss.classList.add('item-source');
+
+					itemBlock.appendChild(divItemName);
+					itemBlock.appendChild(divBoss);
 
 					let resultSuppliers = [];
 					for (let j = 0; j < players.length; j++) {
@@ -737,26 +847,29 @@
 						let input = document.createElement('input');
 						let span = document.createElement('span');
 
-						label.appendChild(document.createTextNode(`${sr.name} (${sr.class}): ${sr.points} points + `));
-						span.innerHTML = ` = ${'x'} points`;
+						label.appendChild(document.createTextNode(`${sr.name} (${sr.class}): ${sr.points} + `));
+						span.innerHTML = ` = ${sr.points} points`;
 
 						let div = document.createElement('div');
 						div.appendChild(label);
 						div.appendChild(input);
 						div.appendChild(span);
 
+						input.classList.add('roll');
+						input.placeholder = "0";
+						input.maxLength = 3;
 						input.addEventListener("keyup", () => {
 							console.log(input.value);
 							const val = parseInt(input.value);
 							span.innerHTML = ` = ${sr.points + (isNaN(val) ? 0 : val)} points`;
 						});
 
-						p.appendChild(div);
+						itemBlock.appendChild(div);
 
 						resultSuppliers.push({
 							getPoints: () => {
 								const val = parseInt(input.value);
-								return (isNaN(val) ? 0 : val);
+								return sr.points + (isNaN(val) ? 0 : val);
 							},
 							getMessage: () => {
 								let val = parseInt(input.value);
@@ -787,20 +900,20 @@
 						}
 
 						results.sort((a, b) => {
-							console.log(`Sort a > b`);
+							console.log(`Sort ${a.k} < ${b.k} = ${(a.k < b.k)}`);
 							return (a.k < b.k) ? 1 : -1;
 						});
 
 						for (let i = 0; i < results.length; i++) {
 							const res = results[i];
-							fullMsg += '\n/ra ' + res.v;
+							fullMsg += '\n/ra ' + `(${i + 1}) ` + res.v;
 						}
 
 						console.log(`${fullMsg}`);
 					});
-					p.appendChild(btn);
+					itemBlock.appendChild(btn);
 
-					children.push(p);
+					children.push(itemBlock);
 				}
 			}
 
@@ -812,10 +925,16 @@
 			h1.appendChild(document.createTextNode(sectionName));
 			root.appendChild(h1);
 
-			children.forEach(p => {
-				root.appendChild(p);
-				root.appendChild(document.createElement('hr'));
+			let itemsContainer = document.createElement('div');
+			itemsContainer.classList.add('items-container');
+			root.appendChild(itemsContainer);
+
+			children.forEach(itemBlock => {
+				itemsContainer.appendChild(itemBlock);
+				//itemsContainer.appendChild(document.createElement('hr'));
 			});
+
+			root.appendChild(document.createElement('hr'));
 		}
 	</script>
 	<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
