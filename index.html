@@ -95,7 +95,7 @@
 
 <body>
 	<div id="wrapper">
-		<p>Sulfuras Points Cheatsheet, v0.0.18</p>
+		<p>Sulfuras Points Cheatsheet, v0.0.19</p>
 		<div id="message"></div>
 		<div id="sections-container"></div>
 	</div>
@@ -802,6 +802,16 @@
 			}
 		}
 
+		function addClass(elem, clazz) {
+			if (typeof clazz === 'string') {
+				elem.classList.add(clazz);
+			} else if (Array.isArray(clazz)) {
+				for (let i = 0; i < clazz.length; i++) {
+					elem.classList.add(clazz[i]);
+				}
+			}
+		}
+
 		function createElementA(href, text, title, clazz) {
 			const a = document.createElement('a');
 			a.appendChild(document.createTextNode(text));
@@ -809,14 +819,15 @@
 			if (title) {
 				a.title = title;
 			}
-			if (typeof clazz === 'string') {
-				a.classList.add(clazz);
-			} else if (Array.isArray(clazz)) {
-				for (let i = 0; i < clazz.length; i++) {
-					a.classList.add(clazz[i]);
-				}
-			}
+			addClass(a, clazz);
 			return a;
+		}
+
+		function createElementSpan(text, clazz) {
+			const span = document.createElement('span');
+			span.appendChild(document.createTextNode(text));
+			addClass(span, clazz);
+			return span;
 		}
 
 		function doTheLayout(root, sectionName, sectionItems, groupByItemCollisionsOnly) {
@@ -838,19 +849,22 @@
 
 					itemBlock.appendChild(divItemName);
 					itemBlock.appendChild(divBoss);
+					itemBlock.appendChild(document.createElement('hr'));
 
 					let resultSuppliers = [];
 					for (let j = 0; j < players.length; j++) {
 						const sr = players[j];
 
+						let name = createElementSpan(sr.name, sr.class.toLowerCase());
 						let label = document.createElement('label');
 						let input = document.createElement('input');
 						let span = document.createElement('span');
 
-						label.appendChild(document.createTextNode(`${sr.name} (${sr.class}): ${sr.points} + `));
+						label.appendChild(document.createTextNode(`: ${sr.points} + `));
 						span.innerHTML = ` = ${sr.points} points`;
 
 						let div = document.createElement('div');
+						div.appendChild(name);
 						div.appendChild(label);
 						div.appendChild(input);
 						div.appendChild(span);
