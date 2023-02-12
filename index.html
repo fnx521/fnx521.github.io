@@ -20,6 +20,20 @@
 			foo: bar;
 		}
 
+		#links {
+			margin: 10px;
+		}
+
+		.raid-link {
+			margin: 6px;
+			padding: 6px;
+			color: white;
+		}
+
+		.raid-link.active {
+			background-color: blueviolet;
+		}
+
 		.items-container {
 			display: flex;
 			flex-direction: row;
@@ -95,7 +109,12 @@
 
 <body>
 	<div id="wrapper">
-		<p>Sulfuras Points Cheatsheet, v0.0.19</p>
+		<p>Sulfuras Points Cheatsheet, v0.0.20</p>
+		<div id="links">
+			<a href="?raid=NAXX" id="link-naxx" class="raid-link">Naxx</a>
+			<a href="?raid=AQ40" id="link-aq40" class="raid-link">AQ40</a>
+			<a href="?raid=BWL" id="link-bwl" class="raid-link">BWL</a>
+		</div>
 		<div id="message"></div>
 		<div id="sections-container"></div>
 	</div>
@@ -624,7 +643,12 @@
 		const urlParams = new URLSearchParams(window.location.search);
 		const urlParamRaid = urlParams.get('raid');
 		console.log(`URL Params: raid=${urlParamRaid}`);
-		const config = (CONFIGS[urlParamRaid]) ? CONFIGS[urlParamRaid] : CONFIGS.NAXX;
+
+		const paramRaid = (CONFIGS[urlParamRaid]) ? urlParamRaid : 'NAXX';
+		const config = CONFIGS[paramRaid];
+
+		const linkId = `link-${paramRaid.toLowerCase()}`;
+		document.getElementById(linkId).classList.add('active');
 
 		let gapiInited = false;
 
