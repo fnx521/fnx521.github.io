@@ -20,14 +20,19 @@
 			foo: bar;
 		}
 
-		#links {
-			margin: 10px;
+		#raid-links {
+			margin: 10px 0;
 		}
 
 		.raid-link {
-			margin: 6px;
 			padding: 6px;
 			color: white;
+			background-color: indigo;
+			border-radius: 4px;
+		}
+
+		.raid-link:hover {
+			background-color: darkorchid;
 		}
 
 		.raid-link.active {
@@ -54,6 +59,10 @@
 			border-width: 1px;
 			border-style: solid;
 			border-color: rgb(68, 68, 68);
+		}
+
+		.item-source {
+			font-size: small;
 		}
 
 		input.roll {
@@ -109,8 +118,8 @@
 
 <body>
 	<div id="wrapper">
-		<p>Sulfuras Points Cheatsheet, v0.0.20</p>
-		<div id="links">
+		<p>Sulfuras Points Cheatsheet, v0.0.21</p>
+		<div id="raid-links">
 			<a href="?raid=NAXX" id="link-naxx" class="raid-link">Naxx</a>
 			<a href="?raid=AQ40" id="link-aq40" class="raid-link">AQ40</a>
 			<a href="?raid=BWL" id="link-bwl" class="raid-link">BWL</a>
