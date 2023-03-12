@@ -65,6 +65,10 @@
 			font-size: small;
 		}
 
+		.points-record.unobtainable {
+			opacity: 20%;
+		}
+
 		input.roll {
 			width: 26px;
 			border: 1px solid gray;
@@ -129,7 +133,7 @@
 <body>
 	<div id="wrapper">
 		<div>
-			<p>Sulfuras Points Cheatsheet, v0.0.23</p>
+			<p>Sulfuras Points Cheatsheet, v0.0.24</p>
 			<div class="camel">Camel (with a HUMP) --> <img class="camel" src="camel.svg"></div>
 		</div>
 		<div id="raid-links">
@@ -897,6 +901,10 @@
 					itemBlock.appendChild(divBoss);
 					itemBlock.appendChild(document.createElement('hr'));
 
+					// sort players by points desc
+					players.sort((a, b) => b.points - a.points);
+					const maxPoints = players[0].points;
+
 					let resultSuppliers = [];
 					for (let j = 0; j < players.length; j++) {
 						const sr = players[j];
@@ -910,6 +918,10 @@
 						span.innerHTML = ` = ${sr.points} points`;
 
 						let div = document.createElement('div');
+						div.classList.add('points-record');
+						if ((maxPoints - sr.points) >= 100) {	// gray-out players that cannot obtain an item even if rolled 100
+							div.classList.add('unobtainable');
+						}
 						div.appendChild(name);
 						div.appendChild(label);
 						div.appendChild(input);
