@@ -116,6 +116,10 @@
 			color: rgb(163, 53, 238) !important;
 		}
 
+		.q5 {
+			color: rgb(255, 128, 0) !important;
+		}
+
 		div.camel {
 			float: right;
 		}
@@ -133,7 +137,7 @@
 <body>
 	<div id="wrapper">
 		<div>
-			<p>Sulfuras Points Cheatsheet, v0.0.24</p>
+			<p>Sulfuras Points Cheatsheet, v0.0.25</p>
 			<div class="camel">Camel (with a HUMP) --> <img class="camel" src="camel.svg"></div>
 		</div>
 		<div id="raid-links">
@@ -152,6 +156,7 @@
 
 		const QUALITY_RARE = 3;
 		const QUALITY_EPIC = 4;
+		const QUALITY_LEGENDARY = 5;
 
 		class Item {
 			constructor(boss, name, link, quality) {
@@ -175,7 +180,8 @@
 			new Item('Majordomo Executus', 'Wild Growth Spaulders', 'https://classic.wowhead.com/item=18810'),
 			new Item('Ragnaros', 'Band of Accuria', 'https://classic.wowhead.com/item=17063'),
 			new Item('Ragnaros', 'Onslaught Girdle', 'https://classic.wowhead.com/item=19137'),
-			new Item('Shared', 'Quick Strike Ring', 'https://classic.wowhead.com/item=18821')
+			new Item('Shared', 'Quick Strike Ring', 'https://classic.wowhead.com/item=18821'),
+			new Item('Ragnaros', 'Eye of Sulfuras', 'https://classic.wowhead.com/item=17204', QUALITY_LEGENDARY)
 		];
 
 		const ITEMS_BWL = [
