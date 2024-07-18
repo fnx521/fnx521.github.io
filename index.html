@@ -137,7 +137,7 @@
 <body>
 	<div id="wrapper">
 		<div>
-			<p>Sulfuras Points Cheatsheet, v0.0.25</p>
+			<p>Sulfuras Points Cheatsheet, v0.0.26</p>
 			<div class="camel">Camel (with a HUMP) --> <img class="camel" src="camel.svg"></div>
 		</div>
 		<div id="raid-links">
@@ -684,6 +684,45 @@
 
 		let gapiInited = false;
 
+		let srDataJson;
+		let srDataLua;
+
+		function srDataJsonToLua(srData) {
+			let out = 'local srData = {\n'
+			let count = 0;
+			for (const itemId in srData) {
+				if (Object.hasOwnProperty.call(srData, itemId)) {
+					count += 1;
+					if (count > 1) {
+						out += `,\n`;
+					}
+					out += `\t[${itemId}] = {\n`;
+					let players = srData[itemId];
+					let count2 = 0;
+					for (const i in players) {
+						if (Object.hasOwnProperty.call(players, i)) {
+							count2 += 1;
+							let sr = players[i];
+							if (count2 > 1) {
+								out += ',\n';
+							}
+							out += `\t\t{\n`;
+							out += `\t\t\t["num"] = ${sr['num']},\n`;
+							out += `\t\t\t["date"] = "${sr['date']}",\n`;
+							out += `\t\t\t["name"] = "${sr['name']}",\n`;
+							out += `\t\t\t["class"] = "${sr['class']}",\n`;
+							out += `\t\t\t["itemId"] = ${sr['itemId']},\n`;
+							out += `\t\t\t["points"] = ${sr['points']}\n`;
+							out += `\t\t}`;
+						}
+					}
+					out += `\n\t}`;
+				}
+			}
+			out += '\n};\n'
+			return out;
+		}
+
 		/**
 		 * Callback after api.js is loaded.
 		 */
@@ -847,6 +886,9 @@
 				}
 			}
 			console.log(`groupByItemCollisionsOnly keys: ${Object.keys(groupByItemCollisionsOnly).length}`);
+			
+			srDataJson = groupByItemCollisionsOnly;
+			srDataLua = srDataJsonToLua(srDataJson);
 
 			// clean everything
 			const sectionsContainer = document.getElementById('sections-container');
@@ -988,6 +1030,7 @@
 						}
 
 						console.log(`${fullMsg}`);
+						navigator.clipboard.writeText(fullMsg);
 					});
 					itemBlock.appendChild(btn);
 
@@ -1013,6 +1056,15 @@
 			});
 
 			root.appendChild(document.createElement('hr'));
+
+			// create lua export button
+			let btn = document.createElement('button');
+			btn.innerHTML = 'Lua export';
+			btn.addEventListener("click", () => {
+				console.log(`${srDataLua}`);
+				navigator.clipboard.writeText(srDataLua);
+			});
+			root.appendChild(btn);
 		}
 	</script>
 	<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
