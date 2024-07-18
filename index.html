@@ -137,7 +137,7 @@
 <body>
 	<div id="wrapper">
 		<div>
-			<p>Sulfuras Points Cheatsheet, v0.0.26</p>
+			<p>Sulfuras Points Cheatsheet, v0.0.27</p>
 			<div class="camel">Camel (with a HUMP) --> <img class="camel" src="camel.svg"></div>
 		</div>
 		<div id="raid-links">
@@ -898,6 +898,15 @@
 				const section = config.sections[i];
 				doTheLayout(sectionsContainer, section.name, section.items, groupByItemCollisionsOnly);
 			}
+			
+			// create lua export button
+			let btn = document.createElement('button');
+			btn.innerHTML = 'Lua export';
+			btn.addEventListener("click", () => {
+				console.log(`${srDataLua}`);
+				navigator.clipboard.writeText(srDataLua);
+			});
+			sectionsContainer.appendChild(btn);
 		}
 
 		function addClass(elem, clazz) {
@@ -1056,15 +1065,6 @@
 			});
 
 			root.appendChild(document.createElement('hr'));
-
-			// create lua export button
-			let btn = document.createElement('button');
-			btn.innerHTML = 'Lua export';
-			btn.addEventListener("click", () => {
-				console.log(`${srDataLua}`);
-				navigator.clipboard.writeText(srDataLua);
-			});
-			root.appendChild(btn);
 		}
 	</script>
 	<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
