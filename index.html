@@ -137,11 +137,12 @@
 <body>
 	<div id="wrapper">
 		<div>
-			<p>Sulfuras Points Cheatsheet, v0.0.27</p>
+			<p>Sulfuras Points Cheatsheet, v0.0.28</p>
 			<div class="camel">Camel (with a HUMP) --> <img class="camel" src="camel.svg"></div>
 		</div>
 		<div id="raid-links">
 			<a href="?raid=NAXX" id="link-naxx" class="raid-link">Naxx</a>
+			<a href="?raid=NAXX2" id="link-naxx2" class="raid-link">Naxx2</a>
 			<a href="?raid=AQ40" id="link-aq40" class="raid-link">AQ40</a>
 			<a href="?raid=BWL" id="link-bwl" class="raid-link">BWL</a>
 		</div>
@@ -666,6 +667,19 @@
 					{ name: 'Frostwyrm Lair', items: ITEMS_NAXX_FROSTWYRM_LAIR },
 					{ name: 'Trash and Tier 3 items', items: ITEMS_NAXX_TRASH_AND_TIER },
 				]
+			},
+			NAXX2: {
+				spreadsheetId: '1ZV_9iUlfEY64OKTsuDgxcibha3ptaY0mh8cZaKHK-04',
+				range: 'Log!A4349:H',
+				logBlocks: 1,
+				sections: [
+					{ name: 'Spider Wing', items: ITEMS_NAXX_SPIDER_WING },
+					{ name: 'Plague Wing', items: ITEMS_NAXX_PLAGUE_WING },
+					{ name: 'Deathknight Wing', items: ITEMS_NAXX_DEATHKNIGHT_WING },
+					{ name: 'Abomination Wing', items: ITEMS_NAXX_ABOMINATION_WING },
+					{ name: 'Frostwyrm Lair', items: ITEMS_NAXX_FROSTWYRM_LAIR },
+					{ name: 'Trash and Tier 3 items', items: ITEMS_NAXX_TRASH_AND_TIER },
+				]
 			}
 		};
 
@@ -899,14 +913,24 @@
 				doTheLayout(sectionsContainer, section.name, section.items, groupByItemCollisionsOnly);
 			}
 			
+			// create json export button
+			let btnJson = document.createElement('button');
+			btnJson.innerHTML = 'Json export';
+			btnJson.addEventListener("click", () => {
+				const json = JSON.stringify(srDataJson, null, 4);
+				console.log(`${json}`);
+				navigator.clipboard.writeText(json);
+			});
+			sectionsContainer.appendChild(btnJson);
+			
 			// create lua export button
-			let btn = document.createElement('button');
-			btn.innerHTML = 'Lua export';
-			btn.addEventListener("click", () => {
+			let btnLua = document.createElement('button');
+			btnLua.innerHTML = 'Lua export';
+			btnLua.addEventListener("click", () => {
 				console.log(`${srDataLua}`);
 				navigator.clipboard.writeText(srDataLua);
 			});
-			sectionsContainer.appendChild(btn);
+			sectionsContainer.appendChild(btnLua);
 		}
 
 		function addClass(elem, clazz) {
